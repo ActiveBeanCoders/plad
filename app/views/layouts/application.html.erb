@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plad</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <div class="header">&nbsp;</div>
+    <div class="header">
+        <%= link_to "Home", root_path %>
+        | About
+        | <%= link_to "List", snippets_path %>
+        | <%= link_to "New", new_snippet_path %>
+    </div>
+
+<%= yield %>
+
+</body>
+</html>

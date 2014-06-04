@@ -1,0 +1,29 @@
+
+---
+snippets:
+  columns:
+  - id
+  - bash4
+  - winshell
+  - powershell
+  - vbs
+  - vim
+  - python3
+  - java
+  - js
+  - groovy
+  - c
+  - cpp
+  - scala
+  - erlang
+  - ruby2
+  - clojure
+  - trigger
+  - links
+  - pre
+  - category
+  - desc
+  - created_at
+  - updated_at
+  - rails4
+  records: 

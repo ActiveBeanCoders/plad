@@ -1,0 +1,125 @@
+<%= form_for @snippet do |f| %>
+     <!-- Show errors with creation if any. -->
+     <% if @snippet.errors.any? %>
+         <div id="error_explanation">
+             <h2><%= pluralize(@snippet.errors.count, "error") %> prohibited
+                 this snippet from being saved:</h2>
+             <ul>
+                 <% @snippet.errors.full_messages.each do |msg| %>
+                     <li><%= msg %></li>
+                 <% end %>
+             </ul>
+         </div>
+     <% end %>
+    
+    <%= f.submit %>
+
+<table class="snippet">
+    <tr>
+        <td style="text-align: right;"></td>
+        <td class="property_name"><%= f.label :trigger %></td>
+        <td class="property_val"><%= f.text_field :trigger %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"></td>
+        <td class="property_name"><%= f.label :links %></td>
+        <td class="property_val"><%= f.text_field :links %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"></td>
+        <td class="property_name"><%= f.label :pre %></td>
+        <td class="property_val"><%= f.text_field :pre %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"></td>
+        <td class="property_name"><%= f.label :category %></td>
+        <td class="property_val"><%= f.text_field :category %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"></td>
+        <td class="property_name"><%= f.label 'Description' %></td>
+        <td class="property_val"><%= f.text_field :desc %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "ruby.jpg", height: "32" %></td>
+        <td class="property_name"><%= f.label 'Ruby 2' %></td>
+        <td class="property_val"><%= f.text_area :ruby2 %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "bash.png", height: "32" %></td>
+        <td class="property_name"><%= f.label 'BASH 4' %></td>
+        <td class="property_val"><%= f.text_area :bash4 %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "vim.png", height: "32" %></td>
+        <td class="property_name"><%= f.label :vim %></td>
+        <td class="property_val"><%= f.text_area :vim %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "java.png", height: "32" %></td>
+        <td class="property_name"><%= f.label :java %></td>
+        <td class="property_val"><%= f.text_area :java %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "vb.jpg", height: "32" %></td>
+        <td class="property_name"><%= f.label 'VBScript' %></td>
+        <td class="property_val"><%= f.text_area :vbs %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "python.png", height: "32" %></td>
+        <td class="property_name"><%= f.label 'Python 3' %></td>
+        <td class="property_val"><%= f.text_area :python3 %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "js.jpg", height: "32" %></td>
+        <td class="property_name"><%= f.label 'JavaScript' %></td>
+        <td class="property_val"><%= f.text_area :js %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"></td>
+        <td class="property_name"><%= f.label 'Windows Shell' %></td>
+        <td class="property_val"><%= f.text_area :winshell %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "powershell.png", height: "32" %></td>
+        <td class="property_name"><%= f.label 'PowerShell' %></td>
+        <td class="property_val"><%= f.text_area :powershell %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "groovy.png", height: "32" %></td>
+        <td class="property_name"><%= f.label :groovy %></td>
+        <td class="property_val"><%= f.text_area :groovy %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "c.svg", height: "32" %></td>
+        <td class="property_name"><%= f.label :c %></ %></td>
+        <td class="property_val"><%= f.text_area :c %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "cpp.png", height: "32" %></td>
+        <td class="property_name"><%= f.label 'C++' %></td>
+        <td class="property_val"><%= f.text_area :cpp %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "scala.png", height: "32" %></td>
+        <td class="property_name"><%= f.label :scala %></td>
+        <td class="property_val"><%= f.text_area :scala %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "erlang.png", height: "32" %></td>
+        <td class="property_name"><%= f.label :erlang %></td>
+        <td class="property_val"><%= f.text_area :erlang %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "clojure.jpg", height: "32" %></td>
+        <td class="property_name"><%= f.label :clojure %></td>
+        <td class="property_val"><%= f.text_area :clojure %></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><%= image_tag "rails.png", height: "32" %></td>
+        <td class="property_name"><%= f.label 'Rails 4' %></td>
+        <td class="property_val"><%= f.text_area :rails4 %></td>
+    </tr>
+</table>
+    <%= f.submit %>
+<% end %>

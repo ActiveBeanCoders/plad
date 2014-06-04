@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bash4: MyText
+  winshell: MyText
+  powershell: MyText
+  vbs: MyText
+  vim: MyText
+  python3: MyText
+  java: MyText
+  js: MyText
+  groovy: MyText
+  c: MyText
+  cpp: MyText
+  scala: MyText
+  erlang: MyText
+  ruby2: MyText
+  clojure: MyText
+  trigger: MyString
+  links: MyString
+  pre: MyString
+  category: MyString
+  desc: MyString
+
+two:
+  bash4: MyText
+  winshell: MyText
+  powershell: MyText
+  vbs: MyText
+  vim: MyText
+  python3: MyText
+  java: MyText
+  js: MyText
+  groovy: MyText
+  c: MyText
+  cpp: MyText
+  scala: MyText
+  erlang: MyText
+  ruby2: MyText
+  clojure: MyText
+  trigger: MyString
+  links: MyString
+  pre: MyString
+  category: MyString
+  desc: MyString

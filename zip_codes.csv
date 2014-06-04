@@ -1,0 +1,3407 @@
+s = Snippet.new(
+        :trigger => "if",
+        :pre => "-",
+        :category => "conditional",
+        :desc => "if",
+        :ruby2 => "if ${1:condition}\n    ${2:#}\nend",
+        :bash4 => "if [[ ${1:condition} ]]; then\n    ${2:#statements}\nfi",
+        :vim => "if ${1:condition}\n    ${2:\"}\nendif",
+        :java => "if (${1:condition}) {\n    ${2://}\n}",
+        :vbs => "if ${1:condition} then\n    ${2:'}\nend if",
+        :python3 => "if ${1:condition}:\n    ${2:pass}",
+        :js => "if (${1:condition}) {\n    ${2://}\n}",
+        :powershell => "if (${1:condition}) {\n  ${2:#}\n}",
+        :groovy => "if (${1:condition}) {\n    ${2://}\n}"
+        )
+s = Snippet.new(
+        :trigger => "ma",
+        :links => "mv",
+        :pre => "m",
+        :category => "access modifier",
+        :desc => "abstract, virtual",
+        :bash4 => "na",
+        :java => "abstract ",
+        :vbs => "na"
+        )
+s = Snippet.new(
+        :trigger => "mc",
+        :pre => "m",
+        :category => "access modifier",
+        :desc => "constant, final",
+        :bash4 => "na",
+        :java => "final",
+        :vbs => "const "
+        )
+s = Snippet.new(
+        :trigger => "mp",
+        :pre => "m",
+        :category => "access modifier",
+        :desc => "public",
+        :bash4 => "na",
+        :java => "public ",
+        :vbs => "public "
+        )
+s = Snippet.new(
+        :trigger => "mr",
+        :pre => "m",
+        :category => "access modifier",
+        :desc => "private",
+        :bash4 => "local ",
+        :java => "private ",
+        :vbs => "private "
+        )
+
+s = Snippet.new(
+    :trigger => "ms",
+    :pre => "m",
+    :category => "access modifier",
+    :desc => "static",
+    :bash4 => "NA",
+    :java => "static ",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "mt",
+    :pre => "m",
+    :category => "access modifier",
+    :desc => "protected",
+    :bash4 => "NA",
+    :java => "protected ",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ar",
+    :pre => "ar",
+    :category => "array",
+    :desc => "array",
+    :ruby2 => "${1:ar} = [${2:csv}]",
+    :bash4 => "declare -a ${1:ar}=(${2:1 2 3})",
+    :java => "${1:Object}[] arr = new $1[${2:10}];",
+    :vbs => "xDim ${1:ar}(${2})",
+    :python3 => "${1:ar} = [${2:csv}]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ar2da",
+    :pre => "ar",
+    :category => "array",
+    :desc => "convert array to dynamic array",
+    :bash4 => "NA",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "aradd",
+    :pre => "ar",
+    :category => "array",
+    :desc => "add new element at non-existent index",
+    :ruby2 => "${1:ar}.push(${2:val})",
+    :bash4 => "${1:ar}+=${2:val}",
+    :java => "// import java.util.Arrays;\nint origLength = ${1:origArray}.length;\n$1 = java.util.Arrays.copyOf($1, origLength + 1);\n$1[origLength] = ${2:newElement};",
+    :vbs => "ReDim Preserve ${1:ar}[UBound($1) + 1]\n$1(UBound($1)) = ${2:foo}",
+    :python3 => "${1:ar}.append(${2:val})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arcon",
+    :pre => "ar",
+    :category => "array",
+    :desc => "array contains",
+    :ruby2 => "${1:ar}.include?(${2:needle})",
+    :bash4 => "if printf \"%s\n\" ${${1:haystack}[@]} | grep -xc ${2:needle}; then\n    ${3:#}\nfi",
+    :vbs => "Dim i\nFor I = Lbound(${1:ar}) to Ubound($1)\n    If $1(i) = ${2:needle} Then\n        ${3:'}\n    End If\nNext",
+    :python3 => "${2:needle} in ${1:ar}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arconcat",
+    :pre => "ar",
+    :category => "array",
+    :desc => "add all elements from one to another",
+    :ruby2 => "${1:ar1} + ${2:ar2}",
+    :bash4 => "(${${1:ar1}[@]} ${${ar2}[@]})",
+    :vbs => "ReDim aTemp(UBound(${1:ar1}) + UBound(${2:ar2}) + 1)\nFor i = 0 To UBound($1)\n    aTemp(i) = $1(i)\nNext\nDim offset: offset = Ubound($1) + 1\nFor i = 0 To UBound($2)\n    aTemp(i + offset) = $2(i)\nNext\n$1 = aTemp",
+    :python3 => "${1:ar1} + ${2:ar2}",
+    :js => "${1:ar1}.concat(${2:ar2})",
+    :powershell => "$${1:ar1} + $${2:ar2}",
+    :groovy => "${1:ar1} + ${2:ar2}",
+    :scala => "${1:ar1} ++ ${2:ar2}",
+    :erlang => "${1:List1} ++ ${2:List2}",
+    :clojure => "(concat ${1:ar1} ${2:ar2})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ardd",
+    :links => "aruniq",
+    :pre => "ar",
+    :category => "array",
+    :desc => "array dedupe, keep unique elements",
+    :ruby2 => "${1:ar}.uniq!",
+    :bash4 => "($(printf \"%s\n\" \"${${1:ar}[@]}\" | sort -u))",
+    :java => "// import java.util.Set;\n// import java.util.HashSet;\n// import java.util.Arrays;\n$1 = new HashSet<${2:Object}>(Arrays.asList(${1:ar})).toArray();",
+    :python3 => "list(set(${1:ar}))",
+    :groovy => "${1:ar}.unique()",
+    :scala => "${1:ar}.distinct",
+    :erlang => "lists:usort(${1:List})",
+    :clojure => "(distinct ${1:ar})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arfilter",
+    :pre => "ar",
+    :category => "array",
+    :desc => "filter elements of array",
+    :ruby2 => "${1:ar}.select { |e| ${2:condition} }",
+    :bash4 => "(${${1:ar}[@]//${2:match}})",
+    :python3 => "[e for e in ${1:ar} if ${2:condition}]",
+    :js => "${1:ar}.filter(function(x) { ${2:return x > 0} })",
+    :groovy => "${1:ar}.findAll() { x -> ${2:x > 0} }"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arget",
+    :pre => "ar",
+    :category => "array",
+    :desc => "get element in array",
+    :ruby2 => "${1:ar}[0]",
+    :bash4 => "${${1:ar}[${2:0}]}",
+    :java => "${1:ar}[${2:0}]",
+    :vbs => "${1:ar}(${2:i})",
+    :python3 => "${1:ar}[0]",
+    :js => "${1:ar}[${2:0}]",
+    :powershell => "$${1:ar}[${2}]",
+    :groovy => "${1:ar}[${2:0}]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arintersect",
+    :pre => "ar",
+    :category => "array",
+    :desc => "inersect with another",
+    :ruby2 => "${1:ar1} & ${2:ar2}",
+    :python3 => "${1:ar1} & ${2:ar2}",
+    :groovy => "${1:ar}.intersect(${2:ar2})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ariter",
+    :pre => "ar",
+    :category => "array",
+    :desc => "iterate through elements",
+    :ruby2 => "@@val\n${1:ar}.each { |${2:e}| ${3} }\n@@val+i\n${1:ar}.each_with_index do |e, i|\n    ${2:#}\nend",
+    :bash4 => "for ${1:i} in ${!${2:ar}[@]}; do\n    ${3:#}\ndone",
+    :vbs => "Dim I\nFor i = 0 To UBound(${1:ar})\n    ${2:'}\nNext",
+    :python3 => "@@val\nfor ${2:e} in ${1:ar}:\n    ${3:#}\n@@val+i\nfor i, e in enumerate(${1:ar}):\n    ${2:#}",
+    :js => "for (var i = 0; i < ${1:ar}.length; i++ ) {\n    ${2://}\n}",
+    :powershell => "foreach ($${1:foo} in $${2:ar}) {\n    ${3:#}\n}",
+    :groovy => "for (i in ${1:ar}) {\n    ${2://}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arlen",
+    :pre => "ar",
+    :category => "array",
+    :desc => "length",
+    :ruby2 => "${1:ar}.size",
+    :bash4 => "${#${1:ar}[@]}",
+    :java => "${1:array}.length",
+    :vbs => "UBound(${${1:ar}})",
+    :python3 => "len(${1:ar})",
+    :js => "${1:ar}.length",
+    :powershell => "$${1:ar}.Length",
+    :groovy => "${1:ar}.size"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arlit",
+    :pre => "ar",
+    :category => "array",
+    :desc => "array literal",
+    :ruby2 => "${1:ar} = [${2:csv}]",
+    :bash4 => "@LINK{ar}",
+    :java => "new ${1:Type}[]{${2:commaSeparatedList}}",
+    :python3 => "${1:ar} = [${2:csv}]",
+    :powershell => "$${1:ar} = @(${2:csv})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "armap",
+    :pre => "ar",
+    :category => "array",
+    :desc => "map operation, apply to each element",
+    :ruby2 => "${1:ar}.map { |e| ${2:operation} }",
+    :bash4 => "for ${1:e} in ${${2:ar}[@]}; do\n    ${3:#}\ndone",
+    :vbs => "@LINK(ariter)",
+    :python3 => "[${2:operation} for e in ${1:ar}]",
+    :js => "${1:ar}.map(function(x) { ${2:return x > 0} })",
+    :groovy => "${1:ar}.collect() { x -> ${2:x > 0} }"
+)
+s.save
+s = Snippet.new(
+    :trigger => "armax",
+    :pre => "ar",
+    :category => "array",
+    :desc => "max element",
+    :ruby2 => "${1:ar}.max",
+    :bash4 => "max=${1:ar}[0]\nfor ${2:e} in ${$1}[@]}; do\n    if [[ $2 > ${e} ]]; then\n        max=${e}\n    endif\ndone",
+    :python3 => "max(${1:ar})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "armin",
+    :pre => "ar",
+    :category => "array",
+    :desc => "min element",
+    :ruby2 => "${1:ar}.min",
+    :bash4 => "min=${1:ar}[0]\nfor ${2:e} in ${$1}[@]}; do\n    if [[ $2 < ${e} ]]; then\n        min=${e}\n    endif\ndone",
+    :python3 => "min(${1:ar})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arreduce",
+    :pre => "ar",
+    :category => "array",
+    :desc => "reduce operation, fold",
+    :ruby2 => "${1:ar}.inject(${3:baseCase}) { |x,y| ${2:operation} }",
+    :bash4 => "reduce=0\nfor (( ${2:i} = 0; $2 < #${1:ar}[@] - 1; $2++ )); do\n    reduce=$1[i] + $1[i+1]\ndone",
+    :python3 => "# from functools import reduce\nreduce(lambda x, y: ${2:operation}, ${1:ar}, ${3:baseCase})",
+    :js => "${1:ar}.reduce(function(a, b) {\n    ${3:operation};\n}, ${2:baseCase})",
+    :groovy => "${1:ar}.inject(${2:baseCase}) { x, y -> ${3:operation} }"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arrem",
+    :pre => "ar",
+    :category => "array",
+    :desc => "remove",
+    :bash4 => "unset ${1:ar}[${2:0}]",
+    :java => "int origLength = ${1:origArray}.length;\n${2:Object}[] tempArr = new $2[origLength - 1];\nint idxToRemove = ${3:0};\nint j = 0;\nfor (int i = 0; i < origLength; i++) {\n    if (i != idxToRemove) {\n        tempArr[j++] = $1[i];\n    }\n}\n$1 = tempArr;",
+    :vbs => "Dim ${1:iRemoveIndex}: $1 = ${2:0}\nDim i\nFor i = $1 To UBound(${3:array}) - 1\n    $3(i) = $3(i + 1)\nNext\nReDim Preserve $3(UBound($3) - 1)",
+    :python3 => "${1:ar}.pop(${2:0})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arset",
+    :pre => "ar",
+    :category => "array",
+    :desc => "set array element at existing index",
+    :ruby2 => "${1:ar} = ${2:val}",
+    :bash4 => "${1:ar}[${2:0}]=${3:val}",
+    :java => "${1:ar}[${2:0}] = ${3:value}",
+    :vbs => "${1:ar}(${2:i}) = ${3:val}",
+    :python3 => "${1:ar} = ${2:val}",
+    :js => "${1:ar}[${2:0}] = ${3:value}",
+    :powershell => "$${1:ar}[${2:0}] = ${3:val}",
+    :groovy => "${1:ar}[${2:0}] = ${3:value}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arsl",
+    :links => "arslice",
+    :pre => "ar",
+    :category => "array",
+    :desc => "get contiguous portion of array",
+    :ruby2 => "${1:ar}[0..1]",
+    :bash4 => "(\"${${1:ar}[@]:${2:startIdx}:${3:length}}\")",
+    :python3 => "${1:ar}[0:1]",
+    :js => "${1:ar}.slice(${2:0,1})",
+    :powershell => "$${1:ar}[${2:0..1}]",
+    :groovy => "${1:ar}[${2:0..1}]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arshuffle",
+    :pre => "ar",
+    :category => "array",
+    :desc => "shuffle, randomize elements",
+    :ruby2 => "${1:ar}.shuffle",
+    :bash4 => "($(printf \"%s\n\" ${${1:ar}[@]} | shuf))",
+    :python3 => "# from random import shuffle, sample\nshuffle(${1:ar})",
+    :groovy => "Collections.shuffle(${1:ar})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arsor",
+    :pre => "ar",
+    :category => "array",
+    :desc => "sort elements in array (in place)",
+    :ruby2 => "${1:ar}.sort!",
+    :bash4 => "($(printf \"%s\n\" ${${1:ar}[@]} | sort))",
+    :python3 => "${1:ar}.sort()",
+    :js => "${1:ar}.sort();",
+    :powershell => "$${1:ar} | Sort-Object",
+    :groovy => "${1:ar}.sort()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arunion",
+    :pre => "ar",
+    :category => "array",
+    :desc => "union with another",
+    :ruby2 => "${1:ar1} | ${2:ar2}",
+    :python3 => "${1:ar1} | ${2:ar2}",
+    :groovy => "(${1:ar1} + ${2:ar2}).unique()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ae",
+    :pre => "a",
+    :category => "assert",
+    :desc => "assert equals"
+)
+s.save
+s = Snippet.new(
+    :trigger => "an",
+    :pre => "a",
+    :category => "assert",
+    :desc => "assert null"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ann",
+    :pre => "a",
+    :category => "assert",
+    :desc => "assert not null"
+)
+s.save
+s = Snippet.new(
+    :trigger => "auplaymp3",
+    :pre => "au",
+    :category => "audio",
+    :desc => "play mp3 file"
+)
+s.save
+s = Snippet.new(
+    :trigger => "auplaywav",
+    :pre => "au",
+    :category => "audio",
+    :desc => "play wav file"
+)
+s.save
+s = Snippet.new(
+    :trigger => "cl",
+    :pre => "cl",
+    :category => "class",
+    :desc => "new class",
+    :bash4 => "NA",
+    :java => "class ${1:FooBarClass} {\n    public $1(${2}) {\n        //\n    }\n    @Override\n    public int hashCode() {\n        org.apache.commons.lang3.builder.HashCodeBuilder hashCodeBuilder;\n        hashCodeBuilder = new org.apache.commons.lang3.builder.HashCodeBuilder(17, 31);\n        // hashCodeBuilder.append(foobar);\n        return hashCodeBuilder.toHashCode();\n    }\n    @Override\n    public boolean equals(Object o) {\n        if (o == this) return true;\n        if (o instanceof this) return false; // Also checks for null.\n        if (foobar1 != o.foobar1) {\n            return false;\n        } else if (foobar2 != o.foobar2) {\n            return false;\n        }\n        return true;\n    }\n    @Override\n    public String toString() {\n        return ;\n    }\n}",
+    :vbs => "Class ${1:foo} '{{{\n    Private Sub Class_Initialize() '{{{\n        Reset\n    End Sub '}}}\n    \n    Private Sub Class_Terminate() '{{{\n        '\n    End Sub '}}}\n    \n    Public Sub Reset() '{{{\n        '\n    End Sub '}}}\n'}}}",
+    :python3 => "class ${1:ClassName}(${2:object}):\n    \"\"\"${3:docstring for $1}\"\"\"\n    def __init__(self, ${4:arg}):\n        ${5:super($1, self).__init__()}\n        self.$4 = $4\n        ${6}",
+    :groovy => "class ${1:FooBarClass} {\n    $1(${2}) {\n        //\n    }\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "clanon",
+    :pre => "cl",
+    :category => "class",
+    :desc => "define anonymous class",
+    :bash4 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "clmethods",
+    :pre => "cl",
+    :category => "class",
+    :desc => "gets class methods",
+    :bash4 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "clname",
+    :pre => "cl",
+    :category => "class",
+    :desc => "gets name of class",
+    :bash4 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "clsub",
+    :pre => "cl",
+    :category => "class",
+    :desc => "make subclass",
+    :bash4 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccguard",
+    :links => "guard",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "restrict execution to single thread",
+    :bash4 => "xargs -i --max-procs=1 ${1:cmd}",
+    :java => "synchronized (LOCK_${1:FOOBAR}) {\n    //\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "cclist",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "list threads",
+    :bash4 => "ps -eLf"
+)
+s.save
+s = Snippet.new(
+    :trigger => "cclock",
+    :links => "lock",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "defines object lock",
+    :bash4 => "NA",
+    :java => "@GuardedBy(\"LOCK_$1\") ${2:private String foobar = \"foobar\"};\nfinal Object LOCK_${1:FOOBAR} = new Object();"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccmsgq",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "define message queue",
+    :bash4 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccmsgrx",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "message receive",
+    :bash4 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccmsgtx",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "message transmit, send",
+    :bash4 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccsleep",
+    :links => "sleep",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "make thread wait, sleep",
+    :ruby2 => "sleep(${1:1.0})",
+    :bash4 => "sleep ${1:1s}",
+    :java => "Thread.sleep(${1:1000});",
+    :python3 => "# import time\ntime.sleep(${1:1.0})",
+    :js => "NA",
+    :groovy => "Thread.sleep(${1:1000});"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccstart",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "starts thread",
+    :ruby2 => "${1:thr} = Thread.new { ${2:sleep(1.0)} }",
+    :bash4 => "@@single thread\n${1:cmd} &\n@@multiple threads\nxargs -0 --max-procs=${2:4} -n 1 ${1:cmd}",
+    :python3 => "class ${1:myThreadClass}(threading.Thread):\n   def run(self):\n       ${2:time.sleep(1.0)}\n${3:thr} = $1()\n$3.start()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccto",
+    :links => "cctimeout",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "timeout",
+    :ruby2 => "# require 'timeout'\nbegin\n    Timeout.timeout(1) do\n        sleep(2)\n    end\nrescue Timeout::Error\nend",
+    :bash4 => "timeout ${1:5} ${2:cmd}",
+    :python3 => "# import signal, time\nclass Timeout(Exception): pass\ndef timeout_handler(signo, fm):\n    raise Timeout()\nsignal.signal(signal.SIGALRM,\n    timeout_handler)\ntry:\n    signal.alarm(1)\n    time.sleep(2)\nexcept Timeout:\n    pass\nsignal.alarm(0)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccterm",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "terminate thread",
+    :bash4 => "kill -9 ${1:pid}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ccwait",
+    :pre => "cc",
+    :category => "concurrency",
+    :desc => "wait on thread",
+    :ruby2 => "${1:thr}.join",
+    :python3 => "${1:thr}.join()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ei",
+    :pre => "-",
+    :category => "conditional",
+    :desc => "else if",
+    :ruby2 => "elif ${1:condition}\n    ${2:#}",
+    :bash4 => "elif [[ ${1:condition} ]]; then\n    ${2:#}",
+    :vim => "elseif ${1:condition}\n    ${2:\"}",
+    :java => "else if (${1:condition}) {\n    ${2://}\n}",
+    :vbs => "ElseIf ${1:condition} Then\n    ${2:'}",
+    :python3 => "elif ${1}:\n    ${2:pass}",
+    :powershell => "elseif (${1:condition}) {\n  ${2:#}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "el",
+    :pre => "-",
+    :category => "conditional",
+    :desc => "else",
+    :ruby2 => "else\n    ${1:#}",
+    :bash4 => "else\n    ${1:#}",
+    :vim => "else\n    ${1:\"}",
+    :java => "else {\n    ${1://}\n}",
+    :vbs => "Else\n    ${1:'}",
+    :python3 => "else:\n    ${1:pass}",
+    :powershell => "else {\n  ${1:#}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ife",
+    :pre => "-",
+    :category => "conditional",
+    :desc => "if else",
+    :ruby2 => "if ${1:condition}\n    ${2:#}\nelse\n    ${3:#}\nend",
+    :bash4 => "if [[ ${1:condition} ]]; then\n    ${2:#}\nelse\n    ${3:#}\nfi",
+    :vim => "if ${1:condition}\n    ${2:\"}\nelse\n    ${3:\"}\nendif",
+    :java => "if (${1:condition}) {\n    ${2://}\n} else {\n    ${3://}\n}",
+    :vbs => "If ${1:condition} Then\n    ${2:'}\nElse\n    ${3:'}\nEnd If",
+    :python3 => "if ${1:condition}:\n    ${2:pass}\nelse:\n    ${3:pass}",
+    :js => "if (${1:condition}) {\n    ${2://}\n} else {\n    ${3://}\n}",
+    :powershell => "if (${1:condition}) {\n  ${2:#}\n} else {\n  ${3:#}\n}",
+    :groovy => "if (${1:condition}) {\n    ${2://}\n} else {\n    ${3://}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ifei",
+    :pre => "-",
+    :category => "conditional",
+    :desc => "if else if else",
+    :ruby2 => "if ${1:condition}\n    ${3:#}\nelif ${2:condition}\n    ${4:#}\nelse\n    ${5:#}\nend",
+    :bash4 => "if [[ ${1:condition} ]]; then\n    ${3:#}\nelif [[ ${2:condition} ]]; then\n    ${4:#}\nelse\n    ${5:#}\nfi",
+    :vim => "if ${1:condition}\n    ${3:\"}\nelseif ${2:condition}\n    ${4:\"}\nelse\n    ${5:\"}",
+    :java => "if (${1:condition}) {\n    ${3://}\n} else if (${2:condition}) {\n    ${4://}\n} else {\n    ${5://}\n}",
+    :vbs => "If ${1:condition} Then\n    ${3:'}\nElseIf ${2:condition} Then\n    ${4:'}\nElse\n    ${5:'}\nEnd If",
+    :python3 => "if ${1:condition}:\n    ${3:pass}\nelif ${2:condition}:\n    ${4:pass}\nelse:\n    ${5:pass}",
+    :js => "if (${1:condition}) {\n    ${2://}\n} else if (${3:condition}) {\n    ${4://}\n} else {\n    ${5://}\n}",
+    :powershell => "if (${1:condition}) {\n  ${3:#}\n} elseif (${2:condition}) {\n  ${4:#}\n} else {\n  ${5:#}\n}",
+    :groovy => "if (${1:condition}) {\n    ${2://}\n} else if (${3:condition}) {\n    ${4://}\n} else {\n    ${5://}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ifet",
+    :links => "ift",
+    :pre => "-",
+    :category => "conditional",
+    :desc => "if else ternary",
+    :bash4 => "$([ ${1:condition} ] && ${2:true} || ${3:false})",
+    :vim => "${1:condition} ? ${2:true} : ${3:false}",
+    :java => "${1:condition} ? ${2:true} : ${3:false};",
+    :python3 => "${2:true} if ${1:condition} else ${3:false}",
+    :js => "${1:condition} ? ${2:true} : ${3:false};",
+    :groovy => "${1:condition} ? ${2:true} : ${3:false};"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sw",
+    :pre => "-",
+    :category => "conditional",
+    :desc => "case, switch, select",
+    :ruby2 => "case ${1:value}\n    when ${2:condition}\n        ${3:#}\n    else\n        ${4:#}\nend",
+    :bash4 => "case ${1:${var}} in\n    ${2:pattern})\n        ${3};;\n    \"a\"|\"b\") ;;\n    *) ;;\nesac",
+    :java => "switch(${1:key}) {\n    case ${2:value}:\n        break;\n    default:\n        break;\n}",
+    :vbs => "Select Case ${1:foo}\n    Case 0\n        '\n    Case 1\n        '\n    Case 2\n        '\n    Case Else\n        '\nEnd Select",
+    :python3 => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "unl",
+    :pre => "-",
+    :category => "conditional",
+    :desc => "unless",
+    :ruby2 => "${2:action} unless ${1:condition}",
+    :vbs => "If Not ${1:condition} Then\n    ${2:'}\nEnd If",
+    :python3 => "if not ${1:condition}:\n    ${2:action}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsdeq",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "define deque"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsdeqadd",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "add element to deque"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsdeqget",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "get element in deque"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsdeqiter",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "iterate through deque entries",
+    :js => "for (var key in ${1:dsm}) {\n    var val = $1[key];\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsdeqlen",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "length of deque"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsdeqrem",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "remove element from deque"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsm",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "map",
+    :ruby2 => "${1:dsm} = { ${2:\"t\" => 1, \"f\" => 0} }",
+    :bash4 => "typeset -A ${1:foo}",
+    :vbs => "Dim d_${1}:Set d_$1 = CreateObject(\"Scripting.Dictionary\")",
+    :python3 => "${1:dsm} = { ${2:'t':1, 'f':0} }",
+    :js => "${1:dsm} = { ${2:\"t\":1, \"f\":0} };",
+    :groovy => "${1:dsm} = [${2:\"t\": 1, \"f\": 0}]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmadd",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "add element to map",
+    :bash4 => "${1:foo}[${2:key}]=${3:val}",
+    :vbs => "d_${1}.Add ${2:key}, ${3:val}",
+    :python3 => "${1:dsm}[${2:key}] = ${3}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmget",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "get element in map",
+    :ruby2 => "${1:dsm}[${2:key}]",
+    :bash4 => "${${1:foo}[${2:key}]}",
+    :vbs => "d_${1}.Item ${2:key}",
+    :python3 => "${1:dsm}[${2:key}]",
+    :js => "${1:dsm}[${2:key}]",
+    :groovy => "${1:dsm}[${2:key}]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmhaskey",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "test if map has key",
+    :ruby2 => "${1:dsm}.has_key?(${2:key})",
+    :vbs => "d_${1}.Exists ${2:key}",
+    :python3 => "${2:key} in ${1:dsm}",
+    :js => "${1:dsm}.hasOwnProperty(${2:key});",
+    :groovy => "${1:dsm}.containsKey(${2:key})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmhasval",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "test if map has value"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmiter",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "iterate through map entries",
+    :ruby2 => "${1:dsm}.each do |key,val|\n    ${2:#}\nend",
+    :bash4 => "for ${1:k} in ${!${2:foo}[@]}; do\n    ${3:#}\ndone",
+    :vbs => "Dim v_item\nFor Each ${2:v_item} In d_${1}.Keys\n    ${3:'}\nNext",
+    :python3 => "for key, val in ${1:dsm}.items():\n    ${2:#}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmkeys",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "retrieve all keys in a map",
+    :ruby2 => "${1:dsm}.keys",
+    :bash4 => "${!${1:foo}[@]}",
+    :vbs => "d_${1}.Keys",
+    :python3 => "list(${1:dsm}.keys())"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmlen",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "length of map",
+    :ruby2 => "${1:dsm}.size",
+    :bash4 => "${#${1:foo}[@]}",
+    :vbs => "d_${1}.Count",
+    :python3 => "len(${1:dsm})",
+    :js => "var ${2:size} = 0;\nfor (var key in ${1:dsm}) { $2++; }",
+    :groovy => "${1:dsm}.size()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmlit",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "literal map",
+    :ruby2 => "@LINK{dsm}",
+    :vbs => "NA",
+    :python3 => "@LINK{dsm}",
+    :js => "${1:dsm} = { ${2:\"t\":1, \"f\":0} };",
+    :groovy => "${1:dsm} = [${2:\"t\": 1, \"f\": 0}]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmrem",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "remove element from map",
+    :ruby2 => "${1:dsm}.delete(${2:key})",
+    :bash4 => "unset \"${1:foo}[${2:key}]\"",
+    :python3 => "del ${1:dsm}[${2:key}]",
+    :js => "delete ${1:dsm}[${2:key}];"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmset",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "set element in map",
+    :bash4 => "@LINK{dsmadd}",
+    :vbs => "@LINK{dsmadd}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmsor",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "sort map by keys or values",
+    :ruby2 => "d.sort_by {|k, v| v}",
+    :vbs => " {{{ Sorts a dictionary by key value.  Dictionary may contain any object type.\n' Function Name: SortDictionary\n' Parameters:    d_objDict - Dictionary to sort.\n' Return:        Sorted dictionary.\n'----------------------------------------------------------------------------}}}\nFunction SortDictionary(d_objDict) '{{{\n    ' declare our variables\n    Dim v_dictKey: v_dictKey = 1\n    Dim v_dictItem: v_dictItem = 2\n    Dim a_strDict()\n    Dim v_objKey\n    Dim s_strKey,s_strItem\n    Dim v_X,v_Y,v_Z\n  \n    ' get the dictionary count\n    Z = d_objDict.Count\n  \n    ' we need more than one item to warrant sorting\n    If Z > 1 Then\n        ' create an array to store dictionary information\n        ReDim a_strDict(Z,2)\n        v_X = 0\n        ' populate the string array\n        For Each v_objKey In d_objDict\n            a_strDict(v_X,v_dictKey)  = CStr(v_objKey)\n            Set a_strDict(v_X,v_dictItem) = d_objDict(v_objKey)\n            v_X = v_X + 1\n        Next\n  \n      ' perform a a shell sort of the string array\n      For v_X = 0 to (Z - 2)\n          For v_Z_Y = v_X to (Z - 1)\n              If StrComp(a_strDict(v_X,v_dictKey),a_strDict(v_Z_Y,v_dictKey),vbTextCompare) > 0 Then\n                  s_strKey  = a_strDict(v_X,v_dictKey)\n                  Set s_strItem = a_strDict(v_X,v_dictItem)\n                  a_strDict(v_X,v_dictKey)  = a_strDict(v_Z_Y,v_dictKey)\n                  Set a_strDict(v_X,v_dictItem) = a_strDict(v_Z_Y,v_dictItem)\n                  a_strDict(v_Z_Y,v_dictKey)  = s_strKey\n                  Set a_strDict(v_Z_Y,v_dictItem) = s_strItem\n              End If\n          Next\n      Next\n  \n      ' erase the contents of the dictionary object\n      d_objDict.RemoveAll\n  \n      ' repopulate the dictionary with the sorted information\n      For v_X = 0 to (Z - 1)\n          d_objDict.Add a_strDict(v_X,v_dictKey), a_strDict(v_X,v_dictItem)\n      Next\n  \n    End If\nEnd Function '}}}",
+    :python3 => "# from operator import itemgetter\nsorted(${1:dsm}.iteritems(), key=itemgetter(${2:0}))"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsmvals",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "retrieve all values in a map",
+    :ruby2 => "${1:dsm}.values",
+    :bash4 => "${${1:foo}[@]}",
+    :vbs => "d_${1}.Items",
+    :python3 => "list(${1:dsm}.values())"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsq",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "define queue"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsqadd",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "add element to queue"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsqget",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "get element in queue"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsqiter",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "iterate through queue entries"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsqlen",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "length of queue"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsqrem",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "remove element from queue"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dss",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "define set"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dssadd",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "add element to set"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dssget",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "get element in set"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dssiter",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "iterate through set entries"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsslen",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "length of set"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dssrem",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "remove element from set"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsst",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "define stack"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsstadd",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "add element to stack"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsstget",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "get element in stack"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsstiter",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "iterate through stack entries"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsstlen",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "length of stack"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dsstrem",
+    :pre => "ds",
+    :category => "data structure",
+    :desc => "remove element from stack"
+)
+s.save
+s = Snippet.new(
+    :trigger => "tafter",
+    :pre => "t",
+    :category => "date time",
+    :desc => "date after",
+    :java => "${1:d}.after(${2})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "tbefore",
+    :pre => "t",
+    :category => "date time",
+    :desc => "date before",
+    :java => "${1:d}.before(${2})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "tformat",
+    :pre => "t",
+    :category => "date time",
+    :desc => "format date time"
+)
+s.save
+s = Snippet.new(
+    :trigger => "tnow",
+    :links => "now",
+    :pre => "t",
+    :category => "date time",
+    :desc => "the date right now",
+    :ruby2 => "${1:now} = Time.now",
+    :java => "// import java.util.Date\nnew Date()",
+    :vbs => "Now",
+    :python3 => "# import datetime\n${1:now} = datetime.datetime.now()",
+    :js => "var ${1:now} = new Date();",
+    :groovy => "${1:now} = new Date()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "tparse",
+    :pre => "t",
+    :category => "date time",
+    :desc => "parse date string"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ttomorrow",
+    :pre => "t",
+    :category => "date time",
+    :desc => "tomorrow's date"
+)
+s.save
+s = Snippet.new(
+    :trigger => "tyesterday",
+    :pre => "t",
+    :category => "date time",
+    :desc => "yesterday's date"
+)
+s.save
+s = Snippet.new(
+    :trigger => "whoami",
+    :pre => "-",
+    :category => "debugging",
+    :desc => "get this method name"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dcl",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "class documentation",
+    :java => "/**\n * ${1:desc}\n *\n * @author `g:snips_author`\n */"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dfile",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "file documentation",
+    :bash4 => "# Name: ${1:name}\n# Version: ${2:0.01}\n# Description: ${3:desc}\n# Author: Dan Barrese (danbarrese.com)\n# Date: `strftime(\"%B %d, %Y\")`\n# Update Log:\n#   `strftime(\"%Y.%m.%d\")` [$2][DRB] Initial version.\n# Sources/References:\n# - None",
+    :java => "/**\n * ${1:desc}\n *\n * @author `g:snips_author`\n */",
+    :vbs => "' Name: ${1:name}\n' Version: ${2:0.01}\n' Description: ${3:desc}\n' Author: Dan Barrese (danbarrese.com)\n' Date: `strftime(\"%B %d, %Y\")`\n' Update Log: {{{\n'   `strftime(\"%Y.%m.%d\")` [$2][DRB] Initial version.\n' }}}\n' Sources/References:\n' - None"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dfn",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "function documentation",
+    :bash4 => "# Description: ${1}\n# Date: `strftime(\"%B %d, %Y\")`\n# Author: Dan Barrese (danbarrese.com)",
+    :java => "/**\n * ${1:desc}\n *\n * @Preconditions\n * <li></li>\n *\n * @Postconditions\n * <li></li>\n *\n * @param\n * @return\n * @throws\n * @author `g:snips_author`\n */",
+    :vbs => "' {{{ ${$1:desc}\n' PARAMS:    ?\n' RETURNS:   ?\n' AUTHOR:    Dan Barrese\n' DATE:      `strftime(\"%B %d, %Y\")`\n'---------------------------------------------------------------------------}}}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dl",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "end of line comment",
+    :bash4 => "# ",
+    :vbs => "' ",
+    :js => "// ",
+    :powershell => "# ",
+    :groovy => "// "
+)
+s.save
+s = Snippet.new(
+    :trigger => "dml",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "multiline comment",
+    :ruby2 => "=begin\n${1}\n=end",
+    :vbs => "NA",
+    :python3 => "'''\n${1}\n'''",
+    :js => "/* ${1} */",
+    :powershell => "<#\n # ${1}\n #>",
+    :groovy => "/* ${1} */"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dpost",
+    :links => "post",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "post conditions",
+    :bash4 => "# Postconditions:\n#     * ",
+    :java => "@Postconditions:\n<li></li>",
+    :vbs => "' Postconditions:\n'     * "
+)
+s.save
+s = Snippet.new(
+    :trigger => "dpre",
+    :links => "pre",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "pre conditions",
+    :bash4 => "# Preconditions:\n#     * ",
+    :java => "@Preconditions:\n<li></li>",
+    :vbs => "' Preconditions:\n'     * "
+)
+s.save
+s = Snippet.new(
+    :trigger => "dstart",
+    :links => "start",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "file header",
+    :bash4 => "#!/bin/bash\n# Name: ${1:name}\n# Version: ${2:0.01}\n# Description: ${3:desc}\n# Author: Dan Barrese (danbarrese.com)\n# Date: `strftime(\"%B %d, %Y\")`\n# Update Log:\n#   `strftime(\"%Y.%m.%d\")` [$2][DRB] Initial version.\n# Sources/References:\n# - None\n",
+    :vim => "\" Name: ${1:`expand('%:t')`}\n\" Version: ${2:0.01}\n\" Description: ${3:desc}\n\" Author: ${4:`g:snips_author`}\n\" Date: `strftime(\"%B %d, %Y\")`\n\" Update Log:\n\"   `strftime(\"%Y.%m.%d\")` [$2][DRB] Initial version.\n\" Sources/References:\n\" - None\n",
+    :java => "/**\n * Name: ${2:name}\n * Version: ${3:0.01}\n * Description: ${4:desc}\n * Author: Dan Barrese (danbarrese.com)\n * Date: `strftime(\"%B %d, %Y\")`\n * Update Log:\n *   `strftime(\"%Y.%m.%d\")` [$3][DRB] Initial version.\n * Sources/References:\n * - None\n */\npublic class ${1:`Filename(\"\", \"FooBarClass\")`} {\n    public static void main (String [] args) {\n        //\n    }\n}",
+    :vbs => "' Option Explicit\n' Name: ${1:name}\n' Version: ${2:0.01}\n' Description: ${3:desc}\n' Author: Dan Barrese (danbarrese.com)\n' Date: `strftime(\"%B %d, %Y\")`\n' Update Log:\n'   `strftime(\"%Y.%m.%d\")` [$2][DRB] Initial version.\n' Sources/References:\n' - None\n",
+    :python3 => "# Name: ${1:name}\n# Version: ${2:0.01}\n# Description: ${3:desc}\n# Author: Dan Barrese (danbarrese.com)\n# Date: `strftime(\"%B %d, %Y\")`\n# Update Log:\n#   `strftime(\"%Y.%m.%d\")` [$2][DRB] Initial version.\n# Sources/References:\n# - None\n"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dtodo",
+    :links => "todo",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "todo tag",
+    :bash4 => "# TODO: ",
+    :vim => "\" TODO: ",
+    :java => "// TODO: ",
+    :vbs => "' TODO: "
+)
+s.save
+s = Snippet.new(
+    :trigger => "dv",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "variable documentation",
+    :bash4 => "# ",
+    :java => "/** ${1} */",
+    :vbs => "' "
+)
+s.save
+s = Snippet.new(
+    :trigger => "h1",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "header",
+    :bash4 => "# ${1:HEADER} {{{\n#``````````````````````````````````````````````````````````````````````````````\n${2}\n#}}}",
+    :java => "// ${1} {{{\n//````````````````````````````````````````````````````````````````````````````` \n//}}}",
+    :vbs => "' > ${1:HEADER} {{{\n'``````````````````````````````````````````````````````````````````````````````\n${2}\n'}}}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "d",
+    :links => "rem",
+    :pre => "d",
+    :category => "documentation",
+    :desc => "end of line comment",
+    :ruby2 => "# ",
+    :bash4 => "# ",
+    :java => "// ",
+    :vbs => "' ",
+    :python3 => "# "
+)
+s.save
+s = Snippet.new(
+    :trigger => "da2ar",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "convert dynamic array to array",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "daadd",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "add",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "daconcat",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "add all elements from one to another",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "daget",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "gets element",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dainit",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "initialize with list",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "daintersect",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "inersect with another",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "daiter",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "iterate through elements",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dalen",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "length, size",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "damax",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "max element",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "damin",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "min element",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "darem",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "remove",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "daset",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "sets element",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dashuffle",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "shuffle, randomize elements",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dasor",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "sort",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "daunion",
+    :pre => "da",
+    :category => "dynamic array",
+    :desc => "union with another",
+    :vbs => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "deccsv",
+    :links => "parsecsv",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "decode csv"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dechtml",
+    :links => "parsehtml",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "decode html"
+)
+s.save
+s = Snippet.new(
+    :trigger => "decjson",
+    :links => "parsejson",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "decode json"
+)
+s.save
+s = Snippet.new(
+    :trigger => "decurl",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "decode url"
+)
+s.save
+s = Snippet.new(
+    :trigger => "decxml",
+    :links => "parsexml",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "decode xml",
+    :ruby2 => "#!/usr/bin/env ruby\n# needed to parse xml\nrequire 'rexml/document'\n# grab the file\nfile = File.new('shop.xml')\n# load it as an xml document\ndoc = REXML::Document.new(file)\n# initialize the total to 0 as a float\n    total = 0.0\n# cycle through the items\n    doc.elements.each('shopping/item') do |item|\n# add the price to the total\n    total += item.attributes['price'].to_f\n    end\n# round the total to the nearest 0.01\n    total = (total*100.0).round/100.0\n# pad the output with the proper number of trailing 0's\n    printf \"$%.2f\n\", total",
+    :java => "// solution uses JAXP and SAX included in Java API since version >= 1.5\nclass ShoppingContentHandler extends DefaultHandler {\n    Double priceSum = 0d;\n    @Override\n        public void startElement(String uri, String localName, String name,\n                Attributes attributes) throws SAXException {\n            if(name.equals(\"item\")) {\n                String quantityString = attributes.getValue(attributes.getIndex(\"quantity\"));\n                String priceString = attributes.getValue(attributes.getIndex(\"price\"));\n                Integer quantity = Integer.parseInt(quantityString);\n                Double price = Double.parseDouble(priceString);\n                priceSum += (quantity * price);\n            }\n        }\n    public Double getPriceSum() {\n        return priceSum;\n    }\n}\nSAXParserFactory parserFactory = SAXParserFactory.newInstance();\ntry {\n    SAXParser parser = parserFactory.newSAXParser();\n    XMLReader reader = parser.getXMLReader();\n    ShoppingContentHandler contentHandler = new ShoppingContentHandler();\n    reader.setContentHandler(contentHandler);\n    reader.parse(new InputSource(new FileReader(\"shopping.xml\")));\n    System.out.printf(\"$%.2f\", contentHandler.getPriceSum());\n} catch (ParserConfigurationException e) {\n    e.printStackTrace();\n} catch (SAXException e) {\n    e.printStackTrace();\n} catch (FileNotFoundException e) {\n    e.printStackTrace();\n} catch (IOException e) {\n    e.printStackTrace();\n}",
+    :python3 => "from xml.dom.minidom import parseString\ndocument = parseString(${1:xmlString}).documentElement\nfor $2 in document.getElementsByTagName('${2:tagName}')]):\n    ${3:pass}",
+    :cpp => "char input[] =\n\"<shopping>\"\n\" <item name=\\"bread\\" quantity=\\"3\\" price=\\"2.50\\"/>\"\n\" <item name=\\"milk\\" quantity=\\"2\\" price=\\"3.50\\"/>\"\n\"</shopping>\";\nxml_document<> doc;\ndoc.parse<0>(input);\nxml_node<> *shopping = doc.first_node();\nfloat total_price = 0;\nfor (xml_node<> *item = shopping->first_node(); item != NULL; item = item->next_sibling())\n{\n    float item_sum = 0;\n    float val;\n    if (string(item->name()) != \"item\")\n        continue;\n    for (xml_attribute<> *attr = item->first_attribute(); attr != NULL; attr = attr->next_attribute())\n    {\n        string name(attr->name());\n        if (name == \"quantity\" || name == \"price\")\n        {\n            stringstream v(attr->value());\n            v >> val;\n            if (item_sum)\n                item_sum *= val;\n            else\n                item_sum = val;\n        }\n    }\n    total_price += item_sum;\n}\ncout.setf(ios::fixed, ios::floatfield);\ncout << \"Total price is $\" << setprecision(2) << total_price << endl;",
+    :scala => "val data = <shopping>\n<item name=\"bread\" quantity=\"3\" price=\"2.50\"/>\n<item name=\"milk\" quantity=\"2\" price=\"3.50\"/>\n</shopping>\nval res = for (\n        item <- data \ \"item\" ;\n        price = (item \ \"@price\").text.toDouble ;\n        qty = (item \ \"@quantity\").text.toInt)\nyield (price * qty)\n    printf(\"$%.2f\n\", res.sum)",
+    :erlang => "-include_lib(\"xmerl/include/xmerl.hrl\").\n-export([get_total/1]).\nget_total(ShoppingList) ->\n{XmlElt, _} = xmerl_scan:string(ShoppingList),\n    Items = xmerl_xpath:string(\"/shopping/item\", XmlElt),\n    Total = lists:foldl(fun(Item, Tot) ->\n            [#xmlAttribute{value = PriceString}] = xmerl_xpath:string(\"/item/@price\", Item),\n            {Price, _} = string:to_float(PriceString),\n            [#xmlAttribute{value = QuantityString}] = xmerl_xpath:string(\"/item/@quantity\", Item),\n            {Quantity, _} = string:to_integer(QuantityString),\n            Tot + Price*Quantity\n            end,\n            0, Items),\n    io:format(\"$~.2f~n\", [Total]).",
+    :clojure => "(println (format \"Total cost of items are $%#.2f\"\n          (->> (xml-seq (parse *xml-input-stream*))\n           (filter #(= :item (:tag %))) ; Remove all but the item tags\n           (map :attrs) ; Keep the attributes\n           (map (fn [e] (str \"(* \" (:quantity e) \" \" (:price e) \")\"))) ; Get the total price as a sexp\n           (map read-string) ; \"(* quantity price)\" -> (* quantity price)\n           (map eval) ; (* quantity price) -> quantity*price\n           (apply +)))) ; Sum all elements"
+)
+s.save
+s = Snippet.new(
+    :trigger => "enccsv",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "encode csv"
+)
+s.save
+s = Snippet.new(
+    :trigger => "enchtml",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "encode html"
+)
+s.save
+s = Snippet.new(
+    :trigger => "encjson",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "encode json"
+)
+s.save
+s = Snippet.new(
+    :trigger => "encurl",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "encode url"
+)
+s.save
+s = Snippet.new(
+    :trigger => "encxml",
+    :pre => "enc/dec",
+    :category => "encode decode",
+    :desc => "encode xml"
+)
+s.save
+s = Snippet.new(
+    :trigger => "xca",
+    :links => "xcatchall",
+    :pre => "x",
+    :category => "error handling",
+    :desc => "catch any exception",
+    :vbs => "If Err Then\n    ${1:'}\nEnd If"
+)
+s.save
+s = Snippet.new(
+    :trigger => "xdef",
+    :pre => "x",
+    :category => "error handling",
+    :desc => "define an exception",
+    :ruby2 => "class ${1:MyException} < Exception\n    def initialize\n      super(\"bam!\")\n    end\nend",
+    :python3 => "class ${1:MyException}(Exception):\n    def __init__(self):\n        super($1, self).__init__('bam!')"
+)
+s.save
+s = Snippet.new(
+    :trigger => "xfi",
+    :links => "xfinally",
+    :pre => "x",
+    :category => "error handling",
+    :desc => "finally clause",
+    :ruby2 => "ensure\n    ${1:#always executes}",
+    :vbs => "NA",
+    :python3 => "finally:\n    ${1:pass #always executes}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "xh",
+    :links => "xhandle",
+    :pre => "x",
+    :category => "error handling",
+    :desc => "handle potential exception (e.g. try/catch)",
+    :ruby2 => "begin\n    ${1:#}\nrescue ${2:RuntimeError} => ${3:e}\n    ${4:#handles exception}\nensure\n    ${5:#always executes}\nend",
+    :bash4 => "cmd = \"${1:command}\"\n$cmd 2>/dev/null\nif (( $? == 0 )); then\n    echo 'command was successful'\nelse\n    echo 'error'\nfi",
+    :java => "try {\n    ${2://}\n} catch (${1:Exception} e) {\n    // TODO: handle exception\n} finally {\n}",
+    :vbs => "On Error Resume Next\n${1:'statements}\nIf Err Then\n    'Err.Description\n    'Err.Clear\nEnd If\nOn Error GoTo 0",
+    :python3 => "try:\n    ${1:pass}\nexcept ${2:Exception} as ${3:e}:\n    ${4:pass #handles exception}\nelse:\n    ${5:pass}\nfinally:\n    ${6:pass #always executes}",
+    :js => "try {\n    ${1://}\n} catch (e) {\n    // TODO: handle exception\n} finally {\n}",
+    :powershell => "try {\n    throw \"${1}\"\n} catch {\n    ${2:#}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "xr",
+    :links => "xraise",
+    :pre => "x",
+    :category => "error handling",
+    :desc => "raise an exception",
+    :ruby2 => "raise \"${1:msg}\"",
+    :java => "throw new ${1:Exception}(${2});",
+    :vbs => "Raise ${1:1}",
+    :python3 => "raise ${1:Exception}(${2:'msg'})",
+    :js => "throw \"${1:error}\";",
+    :powershell => "throw \"${1}\"",
+    :groovy => "throw new ${1:Exception}(${2});"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fila",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "append to file",
+    :bash4 => ">> ${${1:path}}",
+    :java => "fileWriter.append(${1:\"\n\" + \"newline\"});",
+    :vbs => "${1:textFile}.Write(${2:str})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filcopy",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "copy file"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filedir",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "get path where file exists"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filexecutable",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "test if file is executable",
+    :bash4 => "[ -x ${${1:path}} ]",
+    :groovy => "new File(${1:path}).canExecute()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filiter",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "iterate through files"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filname",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "get name of file"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filpath",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "get file path"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filr",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "read file contents",
+    :bash4 => "while read -r line; do\n    ${2:#}\ndone < \"${${1:path}}\"",
+    :java => "// import java.io.BufferedReader;\n// import java.io.File;\n// import java.io.FileInputStream;\n// import java.io.IOException;\n// import java.io.InputStreamReader;\ntry {\n    FileInputStream fis = new FileInputStream(${1:new File()});\n    BufferedReader reader = new BufferedReader(new InputStreamReader(fis));\n    String line = reader.readLine();\n    while (line != null) {\n        ${2://}\n        line = reader.readLine();\n    }\n} catch (IOException e) {\n    // TODO: handle exception\n}",
+    :js => "var fs = require('fs');\nfs.readFileSync(${1:path}, \"utf8\");"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filreadable",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "test if file is readable",
+    :bash4 => "[ -r ${${1:path}} ]",
+    :groovy => "new File(${1:path}).canRead()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filrem",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "remove file"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filrename",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "rename file"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filsize",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "file size",
+    :groovy => "new File(${1:path}).size()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filtmp",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "create temporary file"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filw",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "write file contents",
+    :bash4 => "> ${${1:path}}",
+    :java => "// import java.io.File;\n// import java.io.FileWriter;\n// import java.io.IOException;\ntry {\n    FileWriter fileWriter = new FileWriter(${1:new File()});\n    fileWriter.write(${2:\"contents\"});\n    fileWriter.close();\n} catch (IOException e) {\n    // TODO: handle exception\n}",
+    :vbs => "Dim o_fso: Set o_fso = CreateObject(\"Scripting.FileSystemObject\")\nDim ${1:textFile}:Set $1 = o_fso.OpenTextFile(${2:path}, 2, True)\n$1.Write(${3:str})\n$1.Close"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filwritable",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "test if file is writable",
+    :bash4 => "[ -w ${${1:path}} ]",
+    :groovy => "new File(${1:path}).canWrite()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "filx",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "file exists?",
+    :bash4 => "[ -e ${${1:path}} ]",
+    :java => "new File(${1:path}).exists()",
+    :vbs => "Dim o_fso: Set o_fso = CreateObject(\"Scripting.FileSystemObject\")\nDim b_fileExists: b_fileExists = o_fso.FileExists(${1:path})\nIf b_fileExists Then\n    ${2:'}\nEnd If\nwhile read -r line; do\n    ${1:'}\ndone < \"${path}\"",
+    :groovy => "new File(${1:path}).exists()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "folhome",
+    :links => "home",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "get user's home directory",
+    :bash4 => "${HOME}",
+    :winshell => "%USERPROFILE%"
+)
+s.save
+s = Snippet.new(
+    :trigger => "folmake",
+    :links => "mkdir",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "make directory",
+    :bash4 => "mkdir "
+)
+s.save
+s = Snippet.new(
+    :trigger => "folx",
+    :pre => "fil/fol",
+    :category => "file",
+    :desc => "folder exists?",
+    :java => "new File(${1:path}).exists()",
+    :vbs => "Dim o_fso: Set o_fso = CreateObject(\"Scripting.FileSystemObject\")\nDim b_folderExists: b_folderExists = o_fso.FolderExists(${1:path})\nIf b_folderExists Then\n    ${2:'}\nEnd If"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fn",
+    :pre => "fn",
+    :category => "function",
+    :desc => "new function",
+    :bash4 => "function ${1:fun} {\n    ${2:#local foo=\"bar\"}\n}",
+    :vim => "function ${1:Fun}(${2})\n    ${3:\"}\nendfunction",
+    :java => "private void ${1:fun}(${2}) {\n    ${3://}\n}",
+    :vbs => "Function ${1:fun}(${2}) '{{{\n    ${3:'}\nEnd Function '}}}",
+    :python3 => "def ${1:fun}(`indent('.') ? 'self' : ''`${2}):\n    \"\"\"${3: }\"\"\"\n    ${4:pass}",
+    :js => "function ${1:fun}(${2}) {\n    ${3://}\n}",
+    :powershell => "function ${1:fun} {\n    param (${2:$a, $b})\n    ${3:#}\n}",
+    :groovy => "def ${1:fun}(${2}) {\n    ${3://}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnanon",
+    :pre => "fn",
+    :category => "function",
+    :desc => "anonymous function"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fna",
+    :links => "fnarg",
+    :pre => "fn",
+    :category => "function",
+    :desc => "function argument"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnpdefault",
+    :pre => "fn",
+    :category => "function",
+    :desc => "function parameter with default value",
+    :python3 => "${1:param}=${2:default}",
+    :powershell => "$${1:param}=${2:default}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnpnamed",
+    :pre => "fn",
+    :category => "function",
+    :desc => "named parameter",
+    :ruby2 => "${1:param}=${2:default}",
+    :python3 => "${1:param}=${2:default}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnanamed",
+    :pre => "fn",
+    :category => "function",
+    :desc => "named argument",
+    :ruby2 => "${1:arg}: ${2:val}",
+    :python3 => "${1:arg}=${2:val}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnpref",
+    :pre => "fn",
+    :category => "function",
+    :desc => "parameter by reference",
+    :vbs => "ByRef "
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnpval",
+    :pre => "fn",
+    :category => "function",
+    :desc => "parameter by value",
+    :vbs => "ByVal "
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnaref",
+    :pre => "fn",
+    :category => "function",
+    :desc => "argument by reference",
+    :ruby2 => "${1:foo}",
+    :python3 => "${1:foo}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnaval",
+    :pre => "fn",
+    :category => "function",
+    :desc => "argument by value"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnpvar",
+    :pre => "fn",
+    :category => "function",
+    :desc => "function variable # of args",
+    :ruby2 => "*${1:arg}",
+    :python3 => "*${1:arg}",
+    :js => "function ${1:fun}(arguments) {\n    ${2:arguments[0];}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fncall",
+    :pre => "fn",
+    :category => "function",
+    :desc => "calls, invokes a function",
+    :ruby2 => "${1:fun}(${2:args})",
+    :vim => "call ${1:Fun}(${2:args})",
+    :python3 => "${1:fun}(${2:args})",
+    :js => "${1:fun}(${2:args});",
+    :powershell => "${1:fun}${2: args}",
+    :groovy => "${1:fun}(${2:args});"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnclosure",
+    :links => "closure",
+    :pre => "fn",
+    :category => "function",
+    :desc => "closure",
+    :ruby2 => "def make_counter\n  i = 0\n  return lambda { i +=1; i }\nend\nfoo = make_counter\nfoo.call",
+    :python3 => "def counter():\n    i = 0\n    def closure():\n        nonlocal i\n        i += 1\n        return i\n    return counter\nfoo = make_counter()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fngen",
+    :links => "genfn",
+    :pre => "fn",
+    :category => "function",
+    :desc => "generic function definition"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnn",
+    :pre => "fn",
+    :category => "function",
+    :desc => "function def without any modifiers",
+    :java => "${1:fun}(${2}) {\n    ${3://}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "generic",
+    :links => "gen",
+    :pre => "gen",
+    :category => "generics",
+    :desc => "define generic type"
+)
+s.save
+s = Snippet.new(
+    :trigger => "infil",
+    :pre => "in",
+    :category => "input",
+    :desc => "get file input from user"
+)
+s.save
+s = Snippet.new(
+    :trigger => "inkey",
+    :pre => "in",
+    :category => "input",
+    :desc => "get single keypress",
+    :bash4 => "old_tty_setting=$(stty -g)\nstty -icanon -echo\nkey=$(dd bs=1 count=1 2> /dev/null)\nstty \"${old_tty_setting}\""
+)
+s.save
+s = Snippet.new(
+    :trigger => "inline",
+    :pre => "in",
+    :category => "input",
+    :desc => "get line input from user"
+)
+s.save
+s = Snippet.new(
+    :trigger => "bo",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "boolean type",
+    :java => "boolean "
+)
+s.save
+s = Snippet.new(
+    :trigger => "fa",
+    :links => "F",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "false value",
+    :ruby2 => "false",
+    :bash4 => "false",
+    :java => "false",
+    :python3 => "False",
+    :js => "false",
+    :powershell => "$false",
+    :groovy => "false"
+)
+s.save
+s = Snippet.new(
+    :trigger => "falsehoods",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "all possible false values",
+    :bash4 => "''",
+    :js => "false null undefined \"\" 0 NaN",
+    :powershell => "0 0.0 \"\" ''",
+    :groovy => "false null 0 0.0 \"\" [] [:]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nl",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "null",
+    :ruby2 => "nil",
+    :java => "null",
+    :vbs => "vbNull",
+    :python3 => "None",
+    :js => "null",
+    :powershell => "$null",
+    :groovy => "null"
+)
+s.save
+s = Snippet.new(
+    :trigger => "re",
+    :links => "ret",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "return",
+    :bash4 => "return ${1:0-255}",
+    :java => "return ",
+    :vbs => "${1:functionName} = ",
+    :python3 => "return ",
+    :js => "return ",
+    :groovy => "return "
+)
+s.save
+s = Snippet.new(
+    :trigger => "rn",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "return null",
+    :bash4 => "NA",
+    :js => "return null",
+    :groovy => "null"
+)
+s.save
+s = Snippet.new(
+    :trigger => "s",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "string",
+    :bash4 => "NA",
+    :java => "String "
+)
+s.save
+s = Snippet.new(
+    :trigger => "tr",
+    :links => "T",
+    :pre => "-",
+    :category => "keyword",
+    :desc => "true value",
+    :ruby2 => "true",
+    :bash4 => "true",
+    :java => "true",
+    :python3 => "True",
+    :js => "true",
+    :powershell => "$true",
+    :groovy => "true"
+)
+s.save
+s = Snippet.new(
+    :trigger => "br",
+    :pre => "-",
+    :category => "loop",
+    :desc => "jump out, break",
+    :ruby2 => "break",
+    :bash4 => "break",
+    :java => "break;",
+    :vbs => "$${for}Exit For\n$${do}Exit Do",
+    :python3 => "break",
+    :js => "break;",
+    :powershell => "break",
+    :groovy => "break"
+)
+s.save
+s = Snippet.new(
+    :trigger => "cont",
+    :pre => "-",
+    :category => "loop",
+    :desc => "skip to next, continue",
+    :ruby2 => "next",
+    :bash4 => "continue",
+    :python3 => "continue",
+    :js => "continue;",
+    :powershell => "continue",
+    :groovy => "continue"
+)
+s.save
+s = Snippet.new(
+    :trigger => "dowh",
+    :pre => "-",
+    :category => "loop",
+    :desc => "do while",
+    :java => "do {\n    ${2://}\n} while (${1:condition});"
+)
+s.save
+s = Snippet.new(
+    :trigger => "for",
+    :pre => "-",
+    :category => "loop",
+    :desc => "for",
+    :bash4 => "for (( ${2:i} = 0; $2 < ${1:count}; $2++ )); do\n    ${3:#statements}\ndone",
+    :vim => "for s:i in range(${1:0, 4})\n    ${2:\"}\nendfor",
+    :java => "for (int ${1:i} = ${2:0}; $1 < ${3:5}; $1++) {\n    ${4://}\n}",
+    :vbs => "For ${1:i} = ${2:0} To ${3:i_count}\n    ${4:'}\nNext",
+    :js => "for (int ${1:i} = ${2:0}; $1 < ${3:5}; $1++) {\n    ${4://}\n}",
+    :groovy => "for (int ${1:i} = ${2:0}; $1 < ${3:5}; $1++) {\n    ${4://}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fore",
+    :pre => "-",
+    :category => "loop",
+    :desc => "for each",
+    :bash4 => "for ${1:i} in ${${2:ar}[@]}; do\n    ${3:#}\ndone",
+    :vim => "for ${1:needle} in ${2:haystack}\n    ${3:\"}\nendfor",
+    :java => "for (${1:Type} ${2:elem} : ${3:coll}) {\n    ${4://}\n}",
+    :vbs => "For Each ${1:var} In ${2:coll}\n    ${3:'}\nNext",
+    :python3 => "for ${1:beer} in ${2:wall}:\n    ${3:pass}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "foref",
+    :pre => "-",
+    :category => "loop",
+    :desc => "for each file",
+    :bash4 => "shopt -s nullglob\nfiles=(${path}/*)\nfor fname in ${files[@]}; do\n    printf '%s\n' \"${fname}\"\ndone"
+)
+s.save
+s = Snippet.new(
+    :trigger => "until",
+    :pre => "-",
+    :category => "loop",
+    :desc => "until",
+    :bash4 => "until [[ ${1:condition} ]]; do\n    ${2:#statements}\ndone",
+    :java => "do {\n    ${2://}\n} until (${1:condition});",
+    :vbs => "Do Until ${1:condition}\n    ${2:'}\nLoop "
+)
+s.save
+s = Snippet.new(
+    :trigger => "wh",
+    :pre => "-",
+    :category => "loop",
+    :desc => "while",
+    :ruby2 => "while ${1:condition} do\n    ${2:#}\nend",
+    :bash4 => "while [[ ${1:condition} ]]; do\n    ${2:#}\ndone",
+    :vim => "while ${1:condition}\n    ${2:\"}\nendw",
+    :java => "while (${1:condition}) {\n    ${2://}\n}",
+    :vbs => "Do While ${1:condition}\n    ${2:'}\nLoop",
+    :python3 => "while ${1:condition}:\n    ${2:pass}",
+    :js => "while (${1:condition}) {\n    ${2://}\n}",
+    :powershell => "while (${1:condition}) {\n    ${2:#}\n}",
+    :groovy => "while (${1:condition}) {\n    ${2://}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "argc",
+    :pre => "-",
+    :category => "misc",
+    :desc => "count of program invokation arguments",
+    :bash4 => "$#"
+)
+s.save
+s = Snippet.new(
+    :trigger => "argv",
+    :pre => "-",
+    :category => "misc",
+    :desc => "program invokation arguments",
+    :bash4 => "$@",
+    :groovy => "args"
+)
+s.save
+s = Snippet.new(
+    :trigger => "cli",
+    :pre => "-",
+    :category => "misc",
+    :desc => "command line interface",
+    :bash4 => "while getopts \"w:a:\" n; do\n    case ${n} in\n        w)\n            echo ${OPTARG};;\n        a)\n            echo ${OPTARG};;\n    esac\ndone",
+    :vim => "NO",
+    :python3 => "import argparse\nparser = argparse.ArgumentParser(description='DESCRIPTION')\nparser.add_argument('--int', '-i', metavar='I', type=int, nargs=1,\n                    dest='integer', default=[0],\n                    help='HELP')\nparser.add_argument('--str', '-s', metavar='S', type=str, nargs=1,\n                    dest='string', default=[None],\n                    help='HELP')\nparser.add_argument('--bool', dest='boolean', action='store_true',\n                    help='HELP')\nparser.set_defaults(boolean=True)\nargs = parser.parse_args()\nmy_int = args.integer[0]\nmy_string = args.string[0]\nmy_boolean = args.boolean"
+)
+s.save
+s = Snippet.new(
+    :trigger => "clone",
+    :pre => "-",
+    :category => "misc",
+    :desc => "clone object",
+    :js => "var ${1:clone} = Object.create(${2:cloneable});"
+)
+s.save
+s = Snippet.new(
+    :trigger => "enum",
+    :pre => "-",
+    :category => "misc",
+    :desc => "define enum"
+)
+s.save
+s = Snippet.new(
+    :trigger => "env",
+    :pre => "-",
+    :category => "misc",
+    :desc => "get environment variable",
+    :vim => "$${1:JAVA_HOME}",
+    :powershell => "$env:${1:home}",
+    :groovy => "System.getenv(${1:JAVA_HOME})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "enviter",
+    :pre => "-",
+    :category => "misc",
+    :desc => "iterate through environment variables"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ext",
+    :pre => "-",
+    :category => "misc",
+    :desc => "call external program",
+    :bash4 => "command ${1:foo}",
+    :powershell => "dir"
+)
+s.save
+s = Snippet.new(
+    :trigger => "extil",
+    :links => "extinline",
+    :pre => "-",
+    :category => "misc",
+    :desc => "call external program inline",
+    :bash4 => "$(${1})",
+    :powershell => "dir"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnld",
+    :links => "lambda,ld",
+    :pre => "-",
+    :category => "misc",
+    :desc => "lambda function",
+    :ruby2 => "lambda { |${1:x, y}| ${2:body} }",
+    :python3 => "lambda ${1:x, y}: ${2:body}",
+    :js => "${1:lambda} = function(${2:x}) { ${3:return x}; }",
+    :powershell => "$${1:lambda} = { ${2} }",
+    :groovy => "${1:lambda} = { ${2:x} -> ${3:return x} }"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fnldcall",
+    :pre => "-",
+    :category => "misc",
+    :desc => "lambda function invocation",
+    :ruby2 => "${1:fun}.call(${2:args})",
+    :python3 => "${1:fun}(${2:args})",
+    :powershell => "$${1:lambda}.invoke()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "in",
+    :pre => "-",
+    :category => "misc",
+    :desc => "import, include",
+    :ruby2 => "include ",
+    :java => "import",
+    :python3 => "import ",
+    :js => "<script src=\"${1:path}\"/>"
+)
+s.save
+s = Snippet.new(
+    :trigger => "lazy",
+    :pre => "-",
+    :category => "misc",
+    :desc => "lazy instantiation",
+    :java => "if (${1:var} == null) {\n    $1 = new ${2:Type}();\n}\nreturn $1;"
+)
+s.save
+s = Snippet.new(
+    :trigger => "uname",
+    :pre => "-",
+    :category => "misc",
+    :desc => "username",
+    :vbs => "Dim o_network: Set o_network = CreateObject(\"Wscript.Network\")\nDim s_username: s_username = o_network.UserName"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nabs",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "absolute value",
+    :ruby2 => "${1:x}.abs",
+    :python3 => "abs(${1})",
+    :js => "Math.abs(${1})",
+    :powershell => "[Math]::abs(${1})",
+    :groovy => "Math.abs(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nceil",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "ceiling (next nearest integer)",
+    :js => "Math.ceil(${1})",
+    :powershell => "[Math}::ceiling(${1})",
+    :groovy => "(int) Math.ceil(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ndec",
+    :links => "dec",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "decrement by 1",
+    :bash4 => "$((--${1:var}))",
+    :java => "${1:i}--;",
+    :vbs => "${1:var} = $1 - 1",
+    :powershell => "$${1:foo}--"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ndivf",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "float division",
+    :ruby2 => "${1:x}.div(${2:y})",
+    :vim => "${1:x} / ${2:y}",
+    :python3 => "${1:x} / ${2:y}",
+    :powershell => "$${1:foo} / $${2:bar}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ndivi",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "integer division",
+    :ruby2 => "${1:x} / ${2:y}",
+    :python3 => "${1:x} // ${2:y}",
+    :powershell => "$${1:remainder} = $null\n$${2:quotient} = [Math]::DivRem($${3:numerator}, $${4:denominator}, [ref] $1)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nfloor",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "cloor (previous nearest integer)",
+    :js => "Math.floor(${1})",
+    :powershell => "[Math}::floor(${1})",
+    :groovy => "(int) Math.floor(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ninc",
+    :links => "inc",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "increment by 1",
+    :bash4 => "$((++${1:var}))",
+    :java => "${1:i}++;",
+    :vbs => "${1:var} = $1 + 1",
+    :powershell => "$${1:foo}++"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nme",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "numeric decrement by value",
+    :java => "${1:i} -= ${2:2};",
+    :powershell => "$${1:num} -= ${2:1}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "npad",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "pad a number"
+)
+s.save
+s = Snippet.new(
+    :trigger => "npe",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "numeric increment by value",
+    :java => "${1:i} += ${2:2};",
+    :powershell => "$${1:num} += ${2:1}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "npow",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "power function",
+    :ruby2 => "${1:base} ** ${2:exp}",
+    :python3 => "${1:base} ** ${2:exp}",
+    :js => "Math.pow(${1:base}, ${2:exponent})",
+    :powershell => "[Math]::pow(${1:base}, ${2:exp})",
+    :groovy => "${1:base} ** ${2:exponent}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nrandf",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "random float",
+    :ruby2 => "rand",
+    :python3 => "# import random\nrandom.random()",
+    :js => "Math.random()",
+    :powershell => "random ${1:1.0}",
+    :groovy => "rnd = new Random()\nrnd.nextDouble()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nrandi",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "random integer",
+    :ruby2 => "rand(${1:upper})",
+    :bash4 => "${RANDOM}",
+    :python3 => "# import random\nrandom.randint(${1:lower}, ${1:upper})",
+    :js => "Math.floor(Math.random() * 100)",
+    :powershell => "random ${1:100}",
+    :groovy => "${1:rand} = new Random()\n$1.nextInt(100)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nround",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "round a floating point number",
+    :js => "Math.round(${1})",
+    :powershell => "[Math}::round(${1})",
+    :groovy => "Math.round(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nrounddown",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "round a floating point number down",
+    :powershell => "[Math}::truncate(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nroundup",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "round a floating point number up",
+    :powershell => "[Math}::truncate(${1} + 1)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nseed",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "seed random numbers",
+    :ruby2 => "srand(${1:17})\nseed = srand\nsrand(seed)",
+    :python3 => "# import random\nrandom.seed(${1:17})\nseed = random.getstate()\nrandom.setstate(seed)",
+    :powershell => "$${1:foo} = random -setseed ${2:17}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nsqrt",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "square root",
+    :ruby2 => "# include Math\nsqrt(${1})",
+    :python3 => "# import math\nmath.sqrt(${1})",
+    :js => "Math.sqrt(${1})",
+    :powershell => "[Math]::sqrt(${1})",
+    :groovy => "Math.sqrt(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nvali",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "integer value of string",
+    :ruby2 => "${1:foo}.to_i",
+    :vim => "str2nr(${1})",
+    :python3 => "int(${1})",
+    :js => "parseInt(${1}, 10)",
+    :groovy => "Integer.parseInt(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "and",
+    :pre => "-",
+    :category => "operator",
+    :desc => "and",
+    :ruby2 => "&& ",
+    :bash4 => "&& ",
+    :vim => "&& ",
+    :java => "&& ",
+    :vbs => "And ",
+    :python3 => "and ",
+    :js => "&& ",
+    :powershell => "-and ",
+    :groovy => "&& "
+)
+s.save
+s = Snippet.new(
+    :trigger => "e",
+    :pre => "-",
+    :category => "operator",
+    :desc => "equals",
+    :ruby2 => "== ",
+    :bash4 => "@@$(()) (()) ()\n== \n@@[] [[]]\n-eq",
+    :vim => "== ",
+    :java => "== ",
+    :vbs => "= ",
+    :python3 => "== ",
+    :js => "=== ",
+    :powershell => "-eq ",
+    :groovy => "== "
+)
+s.save
+s = Snippet.new(
+    :trigger => "eo",
+    :pre => "-",
+    :category => "operator",
+    :desc => "equals (for object)",
+    :ruby2 => "== ",
+    :java => "${1:obj1}.equals(${2:obj2})",
+    :python3 => "== "
+)
+s.save
+s = Snippet.new(
+    :trigger => "gt",
+    :pre => "-",
+    :category => "operator",
+    :desc => "greater than",
+    :ruby2 => "> ",
+    :bash4 => "@@$(()) (()) ()\n> \n@@[] [[]]\n-gt",
+    :vim => "> ",
+    :java => "> ",
+    :vbs => "> ",
+    :python3 => "> ",
+    :js => "> ",
+    :powershell => "-gt ",
+    :groovy => "> "
+)
+s.save
+s = Snippet.new(
+    :trigger => "gte",
+    :pre => "-",
+    :category => "operator",
+    :desc => "greather than or equal to",
+    :ruby2 => ">= ",
+    :bash4 => "@@$(()) (()) ()\n>= \n@@[] [[]]\n-ge",
+    :vim => ">= ",
+    :java => ">= ",
+    :vbs => ">= ",
+    :python3 => ">= ",
+    :js => ">= ",
+    :powershell => "-ge ",
+    :groovy => ">= "
+)
+s.save
+s = Snippet.new(
+    :trigger => "lt",
+    :pre => "-",
+    :category => "operator",
+    :desc => "less than",
+    :ruby2 => "< ",
+    :bash4 => "@@$(()) (()) ()\n< \n@@[] [[]]\n-lt",
+    :vim => "< ",
+    :java => "< ",
+    :vbs => "< ",
+    :python3 => "< ",
+    :js => "< ",
+    :powershell => "-lt ",
+    :groovy => "< "
+)
+s.save
+s = Snippet.new(
+    :trigger => "lte",
+    :pre => "-",
+    :category => "operator",
+    :desc => "less than or equal to",
+    :ruby2 => "<= ",
+    :bash4 => "@@$(()) (()) ()\n<= \n@@[] [[]]\n-le",
+    :vim => "<= ",
+    :java => "<= ",
+    :vbs => "<= ",
+    :python3 => "<= ",
+    :js => "<= ",
+    :powershell => "-le ",
+    :groovy => "<= "
+)
+s.save
+s = Snippet.new(
+    :trigger => "me",
+    :pre => "-",
+    :category => "operator",
+    :desc => "minus equals",
+    :ruby2 => "-= ",
+    :bash4 => "-= ",
+    :java => "-= ",
+    :python3 => "-= ",
+    :powershell => "-= "
+)
+s.save
+s = Snippet.new(
+    :trigger => "n",
+    :links => "concat,cat",
+    :pre => "-",
+    :category => "operator",
+    :desc => "concatenate, append",
+    :ruby2 => "+ ",
+    :bash4 => "EMPTY",
+    :vim => ". ",
+    :python3 => "+ ",
+    :js => "+ ",
+    :powershell => "+ ",
+    :groovy => "+ "
+)
+s.save
+s = Snippet.new(
+    :trigger => "ne",
+    :pre => "-",
+    :category => "operator",
+    :desc => "not equals",
+    :ruby2 => "!= ",
+    :bash4 => "!= ",
+    :vim => "!= ",
+    :java => "!= ",
+    :vbs => "<> ",
+    :python3 => "!= ",
+    :js => "!== ",
+    :powershell => "-ne ",
+    :groovy => "!= "
+)
+s.save
+s = Snippet.new(
+    :trigger => "neo",
+    :pre => "-",
+    :category => "operator",
+    :desc => "not equals (for object)",
+    :ruby2 => "!= ",
+    :java => "!${1:obj1}.equals(${2:obj2})",
+    :python3 => "!= "
+)
+s.save
+s = Snippet.new(
+    :trigger => "not",
+    :pre => "-",
+    :category => "operator",
+    :desc => "logical not",
+    :ruby2 => "! ",
+    :bash4 => "! ",
+    :vim => "! ",
+    :python3 => "not ",
+    :js => "!",
+    :powershell => "-not ",
+    :groovy => "!"
+)
+s.save
+s = Snippet.new(
+    :trigger => "or",
+    :pre => "-",
+    :category => "operator",
+    :desc => "or",
+    :ruby2 => "|| ",
+    :bash4 => "|| ",
+    :vim => "|| ",
+    :java => "|| ",
+    :vbs => "Or ",
+    :python3 => "or ",
+    :js => "|| ",
+    :powershell => "-or ",
+    :groovy => "|| "
+)
+s.save
+s = Snippet.new(
+    :trigger => "pe",
+    :pre => "-",
+    :category => "operator",
+    :desc => "plus equals",
+    :ruby2 => "+= ",
+    :bash4 => "+= ",
+    :java => "+= ",
+    :python3 => "+= ",
+    :powershell => "+= "
+)
+s.save
+s = Snippet.new(
+    :trigger => "xor",
+    :pre => "-",
+    :category => "operator",
+    :desc => "exclusive or",
+    :js => "^ "
+)
+s.save
+s = Snippet.new(
+    :trigger => "pabuilder",
+    :pre => "pa",
+    :category => "pattern",
+    :desc => "builder pattern"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pasingleton",
+    :pre => "pa",
+    :category => "pattern",
+    :desc => "singleton pattern"
+)
+s.save
+s = Snippet.new(
+    :trigger => "p",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console",
+    :bash4 => "printf '%s\n' ${1}",
+    :vim => "echo ${1}",
+    :java => "System.out.println(${1:});",
+    :vbs => "WScript.Echo ${1}",
+    :python3 => "print(${1})",
+    :js => "sys.puts(${1});",
+    :powershell => "write-host ${1}",
+    :groovy => "println(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "par",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console array",
+    :bash4 => "printf '%s\n' ${${1:ar}[@]}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pda",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console dynamic array"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pdeque",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console deque"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pf",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console with format",
+    :ruby2 => "${1:\"%s %d %f\"} % [${2:\"str\", 10, 3.14}]",
+    :bash4 => "@LINK{p}",
+    :vim => "printf(\"%s\", ${2:str})",
+    :python3 => "'${1:%s %d %f}' % (${2:'str', 10, 3.14})",
+    :js => "NA",
+    :powershell => "$${1:foo} = ${2:\"str\", 13, 3.7}\n\"{0} {1} {2}\" -f $1",
+    :groovy => "String.format(${1:formatstr}, ${2:csv})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pmap",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console map"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pp",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console string literal",
+    :bash4 => "printf '%s\n' \"${1}\"",
+    :vim => "echo '${1}'",
+    :java => "System.out.println(\"${1:}\");",
+    :vbs => "WScript.Echo \"${1}\"",
+    :python3 => "print(\"${1}\")",
+    :js => "sys.puts(\"${1}\");",
+    :powershell => "write-host \"${1}\"",
+    :groovy => "println(\"${1}\")"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pqueue",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console queue"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pset",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console set"
+)
+s.save
+s = Snippet.new(
+    :trigger => "pstack",
+    :pre => "p",
+    :category => "print",
+    :desc => "print to console stack"
+)
+s.save
+s = Snippet.new(
+    :trigger => "rxg",
+    :links => "rxgroup",
+    :pre => "rx",
+    :category => "regex",
+    :desc => "get groups with regex",
+    :ruby2 => "${1:regex} = /(\d{4})-(\d{2})-(\d{2})/\ngroups = rx.match(${2:\"2010-06-03\"})\nyr, mo, dy = groups[1..3]",
+    :python3 => "${1:regex} = '(\d{4})-(\d{2})-(\d{2})'\ngroups = re.search($1, ${2:'2010-06-03'})\nyr, mo, dy = groups.groups()",
+    :js => "${1:regex} = /^(\d{4})-(\d{2})-(\d{2})$/;\ngroups = $1.exec(${2:'2009-06-03'});\nyr = groups[1];\nmo = groups[2];\ndy = groups[3];",
+    :groovy => "${1:str} = \"2010-06-03\"\ngroups = $1 =~ /(\d{4})-(\d{2})-(\d{2})/\nyr = groups.group(1)\nmo = groups.group(2)\ndy = groups.group(3)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "rxm",
+    :links => "rxmatch",
+    :pre => "rx",
+    :category => "regex",
+    :desc => "match with regex",
+    :ruby2 => "${1:regex}.match(${2:str})",
+    :vim => "match(${1:regex}, ${2:str})",
+    :python3 => "re.search(${1:regex}, ${2:str})",
+    :js => "${1:str}.match(/${2}/)",
+    :powershell => "${1:str} -match ${2:\"^a*$\"})",
+    :groovy => "${1:str} =~ /${2}/"
+)
+s.save
+s = Snippet.new(
+    :trigger => "rxs",
+    :links => "rxsub",
+    :pre => "rx",
+    :category => "regex",
+    :desc => "substitute with regex",
+    :ruby2 => "${1:str}.gsub!(${2:regex}, ${3:replacement})",
+    :bash4 => "${${1:foo}/${2:existing}/${3:replacement}}",
+    :vim => "substitute(${1:str}, ${2:regex}, ${3:replacement}${4:, flags})",
+    :python3 => "${2:regex}.sub(${3:replacement}, ${1:str})",
+    :js => "${1:str}.replace(/${2}/, ${3:replacement})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "rxsg",
+    :links => "rxsuba",
+    :pre => "rx",
+    :category => "regex",
+    :desc => "substitute all with regex",
+    :bash4 => "${${1:foo}//${2:existing}/${3:replacement}}",
+    :vim => "substitute(${1:str}, ${2:regex}, ${3:replacement}, \"g\")",
+    :js => "${1:str}.replace(/${2}/g, ${3:replacement})",
+    :powershell => "$${1:str} = $1 -replace ${2:regex}, ${3:replacement}",
+    :groovy => "${1:str}.replaceAll(/${2}/, ${3:replacement})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "scap",
+    :pre => "s",
+    :category => "string",
+    :desc => "capitalize, proper case",
+    :ruby2 => "${1:str}.capitalize",
+    :bash4 => "${${1:str}^}",
+    :python3 => "# import string\n${1:str}.capitalize()\nstring.capwords($1)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "schop",
+    :pre => "s",
+    :category => "string",
+    :desc => "remove last character from string",
+    :bash4 => "${${1:str}%?}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "scon",
+    :pre => "s",
+    :category => "string",
+    :desc => "contains",
+    :bash4 => "${${1:str}} == *${2:contains}*",
+    :java => "${1:strVar}.contains(${2})",
+    :vbs => "(InStr(\"\"&CStr(${1:str}), \"\"&CStr(${2:contains})) <> 0)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "se",
+    :pre => "s",
+    :category => "string",
+    :desc => "equals",
+    :bash4 => "\"X${1:${str}}\" == \"X${2:${str2}}\"",
+    :vim => "${1:str} == ${2:str2}",
+    :java => "${1:strVar}.equals(${2})",
+    :vbs => "${1:str} = ${2:str2}",
+    :python3 => "x",
+    :powershell => "${1:foo} -ceq ${2:bar}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sei",
+    :pre => "s",
+    :category => "string",
+    :desc => "equals ignore case",
+    :bash4 => "\"X${1:${str,,}}\" == \"X${2:${str2,,}}\"",
+    :java => "${1:strVar}.equalsIgnoreCase(${2})",
+    :vbs => "LCase(${1:str}) = LCase(${2:str2})",
+    :powershell => "${1:foo} -eq ${2:bar}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sempty",
+    :pre => "s",
+    :category => "string",
+    :desc => "null or \"\"",
+    :bash4 => "${${1:str}} == \"\"",
+    :java => "(${1:strVar} == null || $1.trim().isEmpty())",
+    :vbs => "${1:str} = vbNullString"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sends",
+    :pre => "s",
+    :category => "string",
+    :desc => "ends with",
+    :bash4 => "${${1:str}} == *${2:endswith}",
+    :java => "${1:strVar}.endsWith(${2})",
+    :vbs => "(InStrRev(\"\"&CStr(${1:str}), \"\"&CStr(${2:contains})) <> 0)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sexe",
+    :pre => "s",
+    :category => "string",
+    :desc => "execute string as command",
+    :vim => "@@command\nexe ${1:str}\n@@expression\neval(${1:str})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sidxr",
+    :pre => "s",
+    :category => "string",
+    :desc => "last index of substring",
+    :ruby2 => "${1:str}.rindex(${2:needle})",
+    :vim => "strridx(${1:str}, ${2:needle})",
+    :python3 => "${1:str}.rfind(${2:needle})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sidx",
+    :pre => "s",
+    :category => "string",
+    :desc => "first index of substring",
+    :ruby2 => "${1:str}.index(${2:needle})",
+    :vim => "stridx(${1:str}, ${2:needle})",
+    :python3 => "${1:str}.find(${2:needle})",
+    :js => "${1:haystack}.indexOf(${2:needle})",
+    :powershell => "${1:foo}.indexof(${2})",
+    :groovy => "${1:haystack}.indexOf(${2:needle})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sjoin",
+    :pre => "s",
+    :category => "string",
+    :desc => "join tokens into single string",
+    :ruby2 => "%w(${1:ar}).join(' ')",
+    :python3 => "' '.join(${1:ar})",
+    :js => "${1:['a', 'b']}.join(${2:\" \"})",
+    :powershell => "${1:str} -join ${2:\" \"}",
+    :groovy => "${1:['a', 'b']}.join(${2:\" \"})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "slashdir",
+    :pre => "s",
+    :category => "string",
+    :desc => "add trailing / if needed",
+    :bash4 => "${1:str}=\"${$1%/}/\""
+)
+s.save
+s = Snippet.new(
+    :trigger => "slen",
+    :pre => "s",
+    :category => "string",
+    :desc => "length",
+    :ruby2 => "${1:str}.length",
+    :bash4 => "${#${1:str}}",
+    :vim => "strlen(${1:str})",
+    :java => "${1:strVar}.length()",
+    :vbs => "Len(${1:str})",
+    :python3 => "len(${1:str})",
+    :js => "${1}.length",
+    :powershell => "${1:foo}.length",
+    :groovy => "${1}.length()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "slit",
+    :pre => "s",
+    :category => "string",
+    :desc => "string literal",
+    :ruby2 => "${1:'don\t say \"no\"'}",
+    :bash4 => "'${1}'",
+    :vim => "${1:'don''t say \"no\"'}",
+    :python3 => "${1:'don\t say \"no\"'}",
+    :js => "'${1}'",
+    :powershell => "${1:don''t say \"no\"}'",
+    :groovy => "'${1}'"
+)
+s.save
+s = Snippet.new(
+    :trigger => "slower",
+    :links => "slo",
+    :pre => "s",
+    :category => "string",
+    :desc => "lowercase",
+    :ruby2 => "${1:str}.downcase",
+    :bash4 => "${${1},,}",
+    :vim => "tolower(${1})",
+    :java => "${1:strVar}.toLowerCase()",
+    :vbs => "LCase(${1})",
+    :python3 => "${1:str}.lower()",
+    :js => "${1}.toLowerCase()",
+    :powershell => "$${1:foo}.tolower()",
+    :groovy => "${1}.toLowerCase()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sml",
+    :pre => "s",
+    :category => "string",
+    :desc => "multiline string",
+    :ruby2 => "\"${1}\"",
+    :python3 => "\"\"\"${1}\"\"\"",
+    :js => "${1:str} = \"line1\nline2\";",
+    :groovy => "${1:str} = \"\"\"line1\nline2\"\"\""
+)
+s.save
+s = Snippet.new(
+    :trigger => "sne",
+    :pre => "s",
+    :category => "string",
+    :desc => "string not equal",
+    :powershell => "${1:foo} -cne ${2:bar}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "snei",
+    :pre => "s",
+    :category => "string",
+    :desc => "string not equal case insensitive",
+    :powershell => "${1:foo} -ne ${2:bar}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "spadc",
+    :pre => "s",
+    :category => "string",
+    :desc => "pad string on center",
+    :ruby2 => "${1:str}.center(${2:10})",
+    :python3 => "${1:str}.center(${2:10})",
+    :groovy => "${1}.center(${2:1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "spadl",
+    :pre => "s",
+    :category => "string",
+    :desc => "pad string on left",
+    :ruby2 => "${1:str}.ljust(${2:10})",
+    :python3 => "${1:str}.ljust(${2:10})",
+    :powershell => "\" \" * (${2:10} - $1.length) + $${1:foo}",
+    :groovy => "${1}.padLeft(${2:1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "spadr",
+    :pre => "s",
+    :category => "string",
+    :desc => "pad string on right",
+    :ruby2 => "${1:str}.rjust(${2:10})",
+    :python3 => "${1:str}.rjust(${2:10})",
+    :powershell => "$${1:foo} + \" \" * (${2:10} - $1.length)",
+    :groovy => "${1}.padRight(${2:1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ssl",
+    :links => "sslice",
+    :pre => "s",
+    :category => "string",
+    :desc => "slice, get contiguous portion of string"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ssplit",
+    :pre => "s",
+    :category => "string",
+    :desc => "split string into tokens",
+    :ruby2 => "${1:str}.split",
+    :python3 => "${1:str}.split()",
+    :js => "${1:str}.split(${2:\" \"})",
+    :powershell => "${1:str} -split ${2:\" \"}",
+    :groovy => "${1:str}.split(${2})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sstarts",
+    :pre => "s",
+    :category => "string",
+    :desc => "starts with",
+    :bash4 => "${${1:str}} == ${2:startswith}*",
+    :java => "${1:strVar}.startsWith(${2})",
+    :vbs => "(InStr(\"\"&CStr(${1:str}), \"\"&CStr(${2:contains})) = 1)",
+    :python3 => "${1:str}.startswith(${2})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "ssub",
+    :pre => "s",
+    :category => "string",
+    :desc => "substring",
+    :ruby2 => "${1:str}[${2:0..1}]",
+    :bash4 => "${${1:str}:${2:offset}:${3:len}}",
+    :python3 => "${1:str}[${2:0:1}]",
+    :js => "${1:str}.substring(${2:from}, ${3:to})",
+    :powershell => "${1:foo}.substring(${2:4, 3})",
+    :groovy => "${1:str}.substring(${2:from}, ${3:to})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "striml",
+    :pre => "s",
+    :category => "string",
+    :desc => "trim left whitespace",
+    :ruby2 => "${1:str}.lstrip",
+    :python3 => "${1:str}.lstrip()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "strimr",
+    :pre => "s",
+    :category => "string",
+    :desc => "trim right whitespace",
+    :ruby2 => "${1:str}.rstrip",
+    :python3 => "${1:str}.rstrip()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "strim",
+    :pre => "s",
+    :category => "string",
+    :desc => "trim whitespace before & after",
+    :ruby2 => "${1:str}.strip",
+    :python3 => "${1:str}.strip()",
+    :js => "${1}.trim()",
+    :powershell => "$${1:foo}.trim()",
+    :groovy => "${1}.trim()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "supper",
+    :links => "sup",
+    :pre => "s",
+    :category => "string",
+    :desc => "uppercase",
+    :ruby2 => "${1:str}.upcase",
+    :bash4 => "${${1:str}^^}",
+    :vim => "toupper(${1})",
+    :java => "${1:strVar}.toUpperCase()",
+    :vbs => "UCase(${1})",
+    :python3 => "${1:str}.upper()",
+    :js => "${1}.toUpperCase()",
+    :powershell => "$${1:foo}.toupper()",
+    :groovy => "${1}.toUpperCase()"
+)
+s.save
+s = Snippet.new(
+    :trigger => "sval",
+    :pre => "s",
+    :category => "string",
+    :desc => "value as string",
+    :ruby2 => "${1:foo}.to_s",
+    :java => "String.valueOf(${1:var})",
+    :vbs => "CStr(${1:var})",
+    :python3 => "str(${1})",
+    :groovy => "String.valueOf(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "srpg",
+    :pre => "s",
+    :category => "string",
+    :desc => "remove prefix greedily",
+    :bash4 => "${${1:foo}##*${2:prefix}}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "srpr",
+    :pre => "s",
+    :category => "string",
+    :desc => "remove prefix reluctantly",
+    :bash4 => "${${1:foo}#*${2:prefix}}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "srsg",
+    :pre => "s",
+    :category => "string",
+    :desc => "remove suffix greedily",
+    :bash4 => "${${1:foo}%%*${2:suffix}}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "srsr",
+    :pre => "s",
+    :category => "string",
+    :desc => "remove suffix reluctantly",
+    :bash4 => "${${1:foo}%*${2:suffix}}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "testcl",
+    :pre => "test",
+    :category => "testing",
+    :desc => "write test class"
+)
+s.save
+s = Snippet.new(
+    :trigger => "testfn",
+    :links => "test",
+    :pre => "test",
+    :category => "testing",
+    :desc => "write test method",
+    :java => "@Test\npublic void ${1:test}() throws Exception {\n    ${2:// TODO: Implement test.}\n}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "en",
+    :pre => "-",
+    :category => "var actions",
+    :desc => "equals null",
+    :ruby2 => "== nil",
+    :java => "== null",
+    :python3 => "is None",
+    :js => "${1} === null",
+    :powershell => "$${1:foo} -eq $null",
+    :groovy => "${1} === null"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nn",
+    :pre => "-",
+    :category => "var actions",
+    :desc => "not null",
+    :ruby2 => "!= nil",
+    :java => "!= null",
+    :vbs => "Not isEmpty(${1:var})",
+    :python3 => "is not None"
+)
+s.save
+s = Snippet.new(
+    :trigger => "free",
+    :pre => "v",
+    :category => "variable",
+    :desc => "free memory",
+    :ruby2 => "NO",
+    :vim => "unlet! ${1:foo}",
+    :java => "NO",
+    :python3 => "NO"
+)
+s.save
+s = Snippet.new(
+    :trigger => "v",
+    :pre => "v",
+    :category => "variable",
+    :desc => "variable access",
+    :ruby2 => "EMPTY",
+    :bash4 => "${${1}}",
+    :vim => "@@scope: parameter of function\na:${1:foo}\n@@scope: buffer\nb:${1:foo}\n@@scope: global\ng:${1:foo}\n@@scope: local (function)\n${1:foo}\n@@scope: script\ns:${1:foo}\n@@scope: tab\nt:${1:foo}\n@@scope: vim predefined\nv:${1:foo}\n@@scope: window\nw:${1:foo}",
+    :java => "EMPTY",
+    :vbs => "EMPTY",
+    :python3 => "EMPTY",
+    :js => "EMPTY",
+    :powershell => "$"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vaddr",
+    :pre => "v",
+    :category => "variable",
+    :desc => "pass parameter by address"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vb",
+    :pre => "v",
+    :category => "variable",
+    :desc => "boolean",
+    :bash4 => "${1:boolvar}=${2:true}",
+    :java => "boolean ${1:b} = ${2:false};",
+    :vbs => "xDim b_${1}: b_$1 = ${2:True}",
+    :python3 => "${1:b} = ${2:true}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vc",
+    :pre => "v",
+    :category => "variable",
+    :desc => "constant, final, read only",
+    :bash4 => "readonly ${1:ro}=${2}",
+    :java => "final ${1:String} ${2:FOO_BAR} = ${3};",
+    :vbs => "xConst ${1:foo} = ${2}",
+    :python3 => "${1:FOO_BAR} = ${2}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vch",
+    :pre => "v",
+    :category => "variable",
+    :desc => "character",
+    :java => "char ${1:c} = ${2:'a'};",
+    :vbs => "xDim ch_${1}: ch_$1 = \"${2}\""
+)
+s.save
+s = Snippet.new(
+    :trigger => "vcur",
+    :pre => "v",
+    :category => "variable",
+    :desc => "currency",
+    :java => "NO",
+    :vbs => "xDim cur_${1}: cur_$1 = '${2}'"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vd",
+    :pre => "v",
+    :category => "variable",
+    :desc => "double",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "${1:floatvar}=0.00",
+    :java => "double ${1:d} = ${2:1.0};",
+    :vbs => "xDim d_${1}: d_$1 = ${2:0.0}",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vda",
+    :pre => "v",
+    :category => "variable",
+    :desc => "dynamic array"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vderef",
+    :pre => "v",
+    :category => "variable",
+    :desc => "dereference variable",
+    :java => "NO"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vf",
+    :pre => "v",
+    :category => "variable",
+    :desc => "float",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "${1:floatvar}=0.00",
+    :java => "float ${1:f} = ${2:1.0};",
+    :vbs => "Dim d_${1}: d_$1 = ${2:0.0}",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vg",
+    :links => "vgen,genv",
+    :pre => "v",
+    :category => "variable",
+    :desc => "generic",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "NA",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vglobal",
+    :links => "vgl,global",
+    :pre => "v",
+    :category => "variable",
+    :desc => "define global variable",
+    :ruby2 => "$${1:foo} = ${2}",
+    :bash4 => "@LINK{vv}",
+    :vim => "let g:${1:foo} = ${2:val}",
+    :java => "public class ${4:Global} {\n    public static ${1:String} ${2:foo} = ${3:\"bar\"};\n}",
+    :python3 => "${1:foo} = ${2}\ndef access_global():\n    global $1",
+    :js => "${1:foo} = ${2};"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vi",
+    :pre => "v",
+    :category => "variable",
+    :desc => "integer",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "declare -i ${1:i}=0",
+    :java => "int ${1:i} = ${2:1};",
+    :vbs => "xDim i_${1}: i_$1 = ${2:0}",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vis",
+    :pre => "v",
+    :category => "variable",
+    :desc => "variable in string (interpolation)",
+    :ruby2 => "#{${1:foo}}",
+    :bash4 => "${${1}}",
+    :python3 => "'{${1:foo}}'.format(**locals())",
+    :js => "NA",
+    :powershell => "$(${1})",
+    :groovy => "${${1}}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vistype",
+    :pre => "v",
+    :category => "variable",
+    :desc => "test variable type",
+    :java => "instanceof ${1:String}",
+    :js => "typeof ${1}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vl",
+    :pre => "v",
+    :category => "variable",
+    :desc => "long",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "@LINK{vv}",
+    :java => "long ${1:l} = ${2:1L};",
+    :vbs => "xDim l_${1}: l_$1 = ${2:0}",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vll",
+    :pre => "v",
+    :category => "variable",
+    :desc => "parallel variable assignment",
+    :ruby2 => "${1:foo}, ${2:bar} = ${3:csv}",
+    :python3 => "${1:foo}, ${2:bar} = ${3:csv}",
+    :powershell => "$${1:foo}, $${2:bar} = ${3:fooval}, ${4:barval}",
+    :groovy => "(${1:foo, bar, baz}) = [${2:1, 2, 3}]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vn",
+    :pre => "v",
+    :category => "variable",
+    :desc => "numeric",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "${1:i}=0",
+    :java => "int ${1:i} = ${2:1};",
+    :vbs => "xDim n_${1}: n_$1 = ${2:0}",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vo",
+    :pre => "v",
+    :category => "variable",
+    :desc => "object",
+    :bash4 => "NA",
+    :java => "${1:Object} ${2:o} = new $1(${3});",
+    :vbs => "xDim o_${1}:Set o_$1 = New $1",
+    :groovy => "${1:Object} ${2:o} = new $1(${3});"
+)
+s.save
+s = Snippet.new(
+    :trigger => "volit",
+    :pre => "v",
+    :category => "variable",
+    :desc => "object literal",
+    :js => "var ${1:o} = {\n    ${2:score: 21,}\n    ${3:fun}: function() {\n      ${4:return null}\n    }\n};"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vr",
+    :links => "vrx",
+    :pre => "v",
+    :category => "variable",
+    :desc => "regex variable",
+    :ruby2 => "${1:foo} = /${2}/",
+    :python3 => "${1:foo} = re.compile('${2}')",
+    :js => "${1:regex} = /${2}/;",
+    :groovy => "NA"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vref",
+    :pre => "v",
+    :category => "variable",
+    :desc => "reference, pointer",
+    :java => "NO"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vs",
+    :pre => "v",
+    :category => "variable",
+    :desc => "string",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "${1:str}=\"${2}\"",
+    :vim => "let ${1:foo} = \"${2:val}\"",
+    :java => "String ${1:s} = ${2:\"foobar\"};",
+    :vbs => "xDim s_${1}: s_$1 = \"${2}\"",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vset",
+    :pre => "v",
+    :category => "variable",
+    :desc => "set variable value",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "@LINK{vv}",
+    :vim => "@@scope: buffer\nlet b:${1:foo} = ${2:val}\n@@scope: global\nlet g:${1:foo} = ${2:val}\n@@scope: function\nlet l:${1:foo} = ${2:val}\n@@scope: script\nlet s:${1:foo} = ${2:val}\n@@scope: tab\nlet t:${1:foo} = ${2:val}\n@@scope: window\nlet w:${1:foo} = ${2:val}",
+    :python3 => "@LINK{vv}",
+    :powershell => "$${1:foo} = ${2:val}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vsl",
+    :pre => "v",
+    :category => "variable",
+    :desc => "single precision float",
+    :ruby2 => "@LINK{vv}",
+    :bash4 => "@LINK{vv}",
+    :java => "single ${1:sl} = ${2:1};",
+    :vbs => "xDim sl_${1}: sl_$1 = ${2:0.0}",
+    :python3 => "@LINK{vv}",
+    :js => "${1:foo} = ${2};"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vswap",
+    :pre => "v",
+    :category => "variable",
+    :desc => "swap variables",
+    :ruby2 => "$${1:foo}, $${2:bar} = $2, $1",
+    :java => "// import java.util.Date\nDate ${1:d} = new Date();",
+    :python3 => "$${1:foo}, $${2:bar} = $2, $1",
+    :js => "tmp = ${1:foo};\n$1 = ${2:bar};\n$2 = tmp;",
+    :powershell => "$${1:foo}, $${2:bar} = $2, $1",
+    :groovy => "(${1:foo}, ${2:bar}) = [$2, $1]"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vt",
+    :pre => "v",
+    :category => "variable",
+    :desc => "date",
+    :ruby2 => "@LINK{vv}",
+    :java => "// import java.util.Date\nDate ${1:d} = new Date();",
+    :vbs => "xDim t_${1}: t_$1 = ${2:Now}",
+    :python3 => "@LINK{vv}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vtuple",
+    :pre => "v",
+    :category => "variable",
+    :desc => "define a tuple"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vv",
+    :pre => "v",
+    :category => "variable",
+    :desc => "dynamic type declaration",
+    :ruby2 => "${1:foo} = ${2}",
+    :bash4 => "${1:foo}=${2:val}",
+    :java => "${1:Object} ${2:o} = new $1();",
+    :vbs => "xDim ${1}",
+    :python3 => "${1:foo} = ${2}",
+    :js => "var ${1:foo} = ${2}",
+    :powershell => "$${1:foo} = ${2:val}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vval",
+    :pre => "v",
+    :category => "variable",
+    :desc => "pass parameter by value"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vx",
+    :pre => "v",
+    :category => "variable",
+    :desc => "variable exists?",
+    :vim => "exists(\"${1:foo}\")"
+)
+s.save
+s = Snippet.new(
+    :trigger => "email",
+    :pre => "-",
+    :category => "web",
+    :desc => "send an email",
+    :ruby2 => "require 'net/smtp'\nrequire 'webrick/utils'\nbody = ${1:body}\nFROM = '${2:from@here.com}'\nTO = '${3:to@there.com}'\nSUBJECT = '${4:subject}'\nDATE = Time.now.rfc2822()\nSMTPSRV = '${5:smtp}'\nMSGID = '<' + WEBrick::Utils.random_string(21) + '.' + WEBrick::Utils.random_string(21) + '@' + SMTPSRV + '>'\nNet::SMTP.start(SMTPSRV, 25) do |smtp|\n    smtp.open_message_stream(FROM, [TO])\n    do |msg|\n        msg.puts \"From: #{FROM}\"\n        msg.puts \"To: #{TO}\"\n        msg.puts \"Subject: #{SUBJECT}\"\n        msg.puts \"Date: #{DATE}\"\n        msg.puts \"Message-ID: #{MSGID}\"\n        msg.puts\n        msg.puts body\n    end\nend",
+    :java => "// requires Java Mail API (mail.jar), which must be in classpath\ntry {\n    Properties props = System.getProperties();\n    props.put(\"mail.smtp.host\", \"smtp.sampledomain.com\");\n    Session session = Session.getDefaultInstance(props, null);\n    Message msg = new MimeMessage(session);\n    msg.setFrom(new InternetAddress(\"gaylord.focker@hollywood.com\"));\n    msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(\"father@family.com\"));\n    msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(\"mother@family.com\"));\n    msg.setSubject(\"subject\");\n    msg.setText(\"message body\");\n    msg.setHeader(\"X-Mailer\", \"jAVAmAILER\");\n    msg.setSentDate(new Date());\n    Transport.send(msg);\n} catch (AddressException e) {\n    e.printStackTrace();\n} catch (MessagingException e) {\n    e.printStackTrace();\n}",
+    :python3 => "#import smtplib\n#import locale\n#from email.mime.text import MIMEText\nencoding = locale.getpreferredencoding()\nfrom_addr = \"${1:from@here.com}\"\nto_addr = \"${2:to@there.com}\"\nsmtp_servername = \"#{3:smtp.server.com}\"\nsubject = ${4:\"Subject\"}\nbody = ${5:\"This is the message.\"}\nmessage = MIMEText(body, _charset=encoding)\nmessage[\"From\"] = from_addr\nmessage[\"To\"] = to_addr\nmessage[\"Subject\"] = subject\nserver = smtplib.SMTP(smtp_servername)\nserver.sendmail(from_addr, to_addr, message.as_string())",
+    :scala => "// requires Java Mail API (mail.jar), which must be in classpath\nimport javax.mail._\nimport javax.mail.internet._\nimport java.util.Properties._\n// Get the user's message\nprintln(\"Enter the text you wish to send in the message (hit Ctrl-D to finish):\")\nvar bodyText = \"\"\nvar line = readLine\nwhile (line != null) {\n    bodyText += line\n        line = readLine\n}\n// Confirm they want to send\nprintln(\"Are you sure you want to send the message? [y/N]\")\nval yesOrNo = readLine\nif (yesOrNo != \"y\" && yesOrNo != \"Y\") {\n    println(\"Aborted\")\n        exit\n}\n// Set up the mail object\nval properties = System.getProperties\n    properties.put(\"mail.smtp.host\", \"localhost\")\n    val session = Session.getDefaultInstance(properties)\nval message = new MimeMessage(session)\n    // Set the from, to, subject, body text\n    message.setFrom(new InternetAddress(\"test@example.org\"))\n    message.setRecipients(Message.RecipientType.TO, \"spam@mopoke.co.uk\")\n    message.setSubject(\"Greetings from langref.org\")\nmessage.setText(bodyText)\n    // And send it\nTransport.send(message)"
+)
+s.save
+s = Snippet.new(
+    :trigger => "nvalf",
+    :pre => "n",
+    :category => "numeric",
+    :desc => "float value of string",
+    :ruby2 => "${1:foo}.to_f",
+    :vim => "str2float(${1})",
+    :python3 => "float(${1})",
+    :js => "parseFloat(${1})",
+    :groovy => "Double.parseDouble(${1})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "arsplat",
+    :pre => "ar",
+    :category => "array",
+    :desc => "apply function to array elements",
+    :ruby2 => "${1:fun}(${2:args, }*${3:ar})",
+    :python3 => "${1:fun}(${2:args, }*${3:ar})"
+)
+s.save
+s = Snippet.new(
+    :trigger => "vld",
+    :pre => "v",
+    :category => "variable",
+    :desc => "function as value",
+    :ruby2 => "${1:foo} = lambda {|${2:x, y}| ${3:body}}",
+    :python3 => "${1:foo} = ${2:fun}"
+)
+s.save
+s = Snippet.new(
+    :trigger => "fndecorator",
+    :pre => "fn",
+    :category => "function",
+    :desc => "function decorator",
+    :python3 => "def ${1:logcall}(f):\n    def wrapper(*a, **opts):\n        print('before ' + f.__name__)\n        f(*a, **opts)\n        print('after ' + f.__name__)\n    return wrapper\n@$1\ndef square(x):\n    return x * x"
+)
+s.save

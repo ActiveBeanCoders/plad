@@ -1,0 +1,75 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+div.header {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    padding: 0 1em 0 1em;
+    color: white;
+    background-color: darkblue;
+}
+
+div.header a {
+    padding: 0 10px 0 10px;
+    text-decoration: underline;
+    background-color: lightblue;
+    color: blue;
+}
+div.header a:visited {
+}
+div.header a:hover {
+    background-color: white;
+}
+
+table.snippets {
+    /* width: 500em; */
+    margin: 0 0 10em 0;
+    padding: 0;
+    font-size: 90%;
+    border-spacing: 0;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+table.snippets th, table.snippets td {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+table.snippets th {
+    background-color: lightgray;
+}
+table.snippets pre {
+    padding: 2px;
+}
+
+table.snippet textarea {
+    width: 80em;
+    height: 15em;
+    font-size: 120%;
+    padding: 4px;
+    color: blue;
+}
+
+td.property_name {
+    font-weight: bold;
+}
+td.property_val pre {
+    border: 1px solid black;
+}
+
+th .current {
+    padding-right: 16px;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 16px 16px;
+}
+
+th .asc {
+    background-image: url(up_arrow.png);
+}
+th .desc {
+    background-image: url(down_arrow.png);
+}

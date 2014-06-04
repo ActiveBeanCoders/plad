@@ -1,0 +1,125 @@
+<h1>All Snippets</h1>
+
+<table class="snippets">
+
+    <tr>
+        <th>V</th>
+        <th>E</th>
+        <th>D</th>
+        <th><%= sortable "trigger" %></th>
+        <th><%= sortable "links" %></th>
+        <th><%= sortable "pre" %></th>
+        <th><%= sortable "category" %></th>
+        <th><%= sortable "desc", "Description" %></th>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'ruby2') %>
+            <th><%= sortable "ruby2", "Ruby 2" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'bash4') %>
+            <th><%= sortable "bash4", "BASH 4" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'vim') %>
+            <th><%= sortable "vim" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'java') %>
+            <th><%= sortable "java" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'vbs') %>
+            <th><%= sortable "vbs", "VBScript" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'python3') %>
+            <th><%= sortable "python3", "Python 3" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'js') %>
+            <th><%= sortable "js", "JavaScript" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'winshell') %>
+            <th><%= sortable "winshell", "Windows Shell" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'powershell') %>
+            <th><%= sortable "powershell", "PowerShell" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'groovy') %>
+            <th><%= sortable "groovy" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'c') %>
+            <th><%= sortable "c" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'cpp') %>
+            <th><%= sortable "cpp", "C++" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'scala') %>
+            <th><%= sortable "scala" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'erlang') %>
+            <th><%= sortable "erlang" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'clojure') %>
+            <th><%= sortable "Clojure" %></th>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'rails4') %>
+            <th><%= sortable "Rails 4" %></th>
+        <% end %>
+    </tr>
+
+    <% @snippets.each do |s| %>
+    <tr>
+        <td><%= link_to "V", s, :class => "view" %></td>
+        <td><%= link_to "E", edit_snippet_path(s.id), :class => "edit" %></td>
+        <td><%= link_to "D", snippet_path(s), method: :delete, data: {confirm: 'Are you sure?'}, :class => "delete" %></td>
+        <td><pre><%= s.trigger %></pre></td>
+        <td><pre><%= s.links %></pre></td>
+        <td><pre><%= s.pre %></pre></td>
+        <td><pre><%= s.category %></pre></td>
+        <td><pre><%= s.desc %></pre></td>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'ruby2') %>
+            <td><pre><%= s.ruby2 %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'bash4') %>
+            <td><pre><%= s.bash4 %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'vim') %>
+            <td><pre><%= s.vim %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'java') %>
+            <td><pre><%= s.java %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'vbs') %>
+            <td><pre><%= s.vbs %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'python3') %>
+            <td><pre><%= s.python3 %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'js') %>
+            <td><pre><%= s.js %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'winshell') %>
+            <td><pre><%= s.winshell %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'powershell') %>
+            <td><pre><%= s.powershell %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'groovy') %>
+            <td><pre><%= s.groovy %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'c') %>
+            <td><pre><%= s.c %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'cpp') %>
+            <td><pre><%= s.cpp %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'scala') %>
+            <td><pre><%= s.scala %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'erlang') %>
+            <td><pre><%= s.erlang %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'clojure') %>
+            <td><pre><%= s.clojure %></pre></td>
+        <% end %>
+        <% if !params[:langs] or (params[:langs] and params[:langs].include? 'rails4') %>
+            <td><pre><%= s.rails4 %></pre></td>
+        <% end %>
+    </tr>
+    <% end %>
+
+</table>
